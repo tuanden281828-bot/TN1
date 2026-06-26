@@ -14,6 +14,8 @@
 <link rel="icon" href="./Logo-PNG.png"/>
 <link rel="preload" href="./hero-bg.webp" as="image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://picsum.photos"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -173,7 +175,7 @@ section{padding:96px 48px}
 .gallery{background:var(--deep);padding-top:76px;padding-bottom:76px}
 .gallery-header{text-align:center;margin-bottom:44px}
 .gallery-header .section-desc{margin:14px auto 0}
-.gallery-strip{display:flex;gap:12px;overflow-x:auto;padding:0 48px 16px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory;cursor:grab}
+.gallery-strip{display:flex;gap:12px;overflow-x:auto;padding:0 48px 16px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory;cursor:grab;touch-action:pan-x}
 .gallery-strip::-webkit-scrollbar{display:none}
 .gallery-strip.grabbing{cursor:grabbing}
 .gallery-item{flex:0 0 270px;height:370px;border-radius:16px;overflow:hidden;position:relative;scroll-snap-align:start}
@@ -1232,6 +1234,10 @@ if (strip) {
   strip.addEventListener('mouseleave', () => { isDown=false; strip.classList.remove('grabbing'); });
   strip.addEventListener('mouseup', () => { isDown=false; strip.classList.remove('grabbing'); });
   strip.addEventListener('mousemove', e => { if(!isDown)return; e.preventDefault(); strip.scrollLeft = scrollLeft-(e.pageX-strip.offsetLeft-startX)*1.5; });
+  // Touch support
+  let touchStartX=0, touchScrollLeft=0;
+  strip.addEventListener('touchstart', e => { touchStartX=e.touches[0].pageX; touchScrollLeft=strip.scrollLeft; }, {passive:true});
+  strip.addEventListener('touchmove', e => { strip.scrollLeft = touchScrollLeft-(e.touches[0].pageX-touchStartX)*1.2; }, {passive:true});
 }
 
 // ── TOUR SELECTION ──
