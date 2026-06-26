@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>V Holiday Tour — Slides Demo</title>
+<link rel="icon" href="./Logo-PNG.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0e0905; --dark:#160f07; --warm:#231608; --mid:#3a2610;
+  --gold:#c9853a; --bright:#f0b955; --sand:#f0ddb8; --cream:#f8f2e6;
+  --white:#fff; --text:#2c2015; --muted:#7a6550;
+  --T:0.55s cubic-bezier(0.77,0,0.18,1);
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:var(--deep);color:var(--white)}
+img{max-width:100%;display:block}
+::selection{background:var(--gold);color:#fff}
+
+/* ══ SLIDER ENGINE ══ */
+.slider{
+  display:flex;
+  height:100vh;
+  width:100vw;
+  overflow:hidden;
+  position:relative;
+}
+.slides-track{
+  display:flex;
+  height:100%;
+  transition:transform var(--T);
+  will-change:transform;
+}
+.slide{
+  width:100vw;height:100vh;
+  flex-shrink:0;overflow:hidden;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ══ UI CHROME ══ */
+.slide-counter{
+  position:fixed;top:28px;right:32px;z-index:50;
+  font-size:0.75rem;letter-spacing:0.18em;
+  color:rgba(255,255,255,0.45);
+  font-weight:500;
+}
+.slide-counter strong{color:var(--bright);font-size:1rem}
+
+.slide-dots{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:50;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  cursor:pointer;transition:all 0.3s;border:none;padding:0;
+}
+.dot.active{background:var(--bright);transform:scale(1.35)}
+
+.arrow{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;z-index:50;
+  background:rgba(201,133,58,0.15);
+  border:1px solid rgba(201,133,58,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;
+  transition:all 0.3s;backdrop-filter:blur(8px);
+  color:var(--white);
+}
+.arrow:hover{background:var(--gold);border-color:var(--gold)}
+.arrow-prev{left:20px}
+.arrow-next{right:20px}
+.arrow.hidden{opacity:0;pointer-events:none}
+
+.slide-title-chip{
+  position:fixed;top:28px;left:50%;transform:translateX(-50%);
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);z-index:50;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:5px 16px;border-radius:100px;
+  backdrop-filter:blur(8px);
+  transition:opacity 0.3s;
+}
+
+/* Logo bar */
+.logo-bar{
+  position:fixed;top:20px;left:28px;z-index:50;
+}
+.logo-bar img{height:36px;background:#fff;border-radius:7px;padding:3px 9px}
+
+/* Progress line */
+.progress-line{
+  position:fixed;bottom:0;left:0;height:3px;z-index:50;
+  background:linear-gradient(to right,var(--gold),var(--bright));
+  transition:width var(--T);
+}
+
+/* Keyboard hint */
+.key-hint{
+  position:fixed;bottom:28px;right:28px;z-index:50;
+  font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em;
+  display:flex;gap:6px;align-items:center;
+}
+.key-hint kbd{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);
+  padding:2px 6px;border-radius:4px;font-family:'Inter',sans-serif;
+}
+
+/* ══ SLIDE 1 — COVER ══ */
+.s-cover{
+  background:
+    linear-gradient(180deg,rgba(10,6,2,0.08) 0%,rgba(10,6,2,0.25) 40%,rgba(10,6,2,0.82) 80%,rgba(10,6,2,0.98) 100%),
+    url('./hero-bg.webp') center 15%/cover no-repeat;
+}
+.s-cover .inner{text-align:center;padding:0 32px;max-width:900px;z-index:1}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(201,133,58,0.45);color:var(--bright);font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;padding:7px 18px;border-radius:100px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,7rem);font-weight:300;line-height:1.05;margin-bottom:8px}
+.cover-title em{font-style:italic;color:var(--bright);display:block}
+.cover-sub{font-size:clamp(0.9rem,1.6vw,1.1rem);color:rgba(255,255,255,0.65);max-width:480px;margin:0 auto 36px;line-height:1.75}
+.cover-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-g{background:var(--gold);color:#fff;padding:13px 32px;border-radius:100px;font-size:0.86rem;font-weight:600;border:none;cursor:pointer;transition:all 0.3s}
+.btn-g:hover{background:var(--bright)}
+.btn-o{background:transparent;color:#fff;padding:13px 32px;border-radius:100px;font-size:0.86rem;border:1px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.3s}
+.btn-o:hover{border-color:#fff;background:rgba(255,255,255,0.06)}
+.cover-hotline{margin-top:28px;font-size:0.78rem;color:rgba(255,255,255,0.4);letter-spacing:0.05em}
+.cover-hotline strong{color:var(--bright)}
+
+/* ══ SLIDE 2 — STATS ══ */
+.s-stats{background:linear-gradient(135deg,var(--dark) 0%,var(--warm) 100%)}
+.s-stats .inner{text-align:center;padding:0 40px;width:100%;max-width:900px}
+.stats-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;margin-bottom:12px}
+.stats-headline em{font-style:italic;color:var(--bright)}
+.stats-sub{font-size:0.92rem;color:rgba(255,255,255,0.45);margin-bottom:56px}
+.stats-row{display:flex;justify-content:center;gap:0}
+.stat-item{flex:1;max-width:220px;text-align:center;padding:24px 32px;border-right:1px solid rgba(201,133,58,0.2)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:600;color:var(--bright);line-height:1;margin-bottom:8px}
+.stat-lbl{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.16em;color:rgba(255,255,255,0.4)}
+.trust-row{display:flex;justify-content:center;gap:32px;margin-top:52px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:rgba(255,255,255,0.5)}
+.trust-icon{font-size:1.1rem}
+
+/* ══ SLIDE 3 — DESTINATIONS ══ */
+.s-dest{background:var(--deep);padding:60px 48px 40px}
+.s-dest .inner{width:100%;max-width:1200px}
+.slide-tag{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:12px}
+.slide-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:32px;line-height:1.15}
+.slide-h2 em{font-style:italic;color:var(--bright)}
+.dest-grid-s{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.dc{position:relative;overflow:hidden;border-radius:10px;cursor:pointer}
+.dc:nth-child(1){grid-column:span 7;aspect-ratio:16/9}
+.dc:nth-child(2){grid-column:span 5;aspect-ratio:4/5}
+.dc:nth-child(3){grid-column:span 4;aspect-ratio:4/3}
+.dc:nth-child(4){grid-column:span 4;aspect-ratio:4/3}
+.dc:nth-child(5){grid-column:span 4;aspect-ratio:4/3}
+.dc img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.dc:hover img{transform:scale(1.06)}
+.dc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,9,5,0.88) 0%,transparent 55%)}
+.dc-info{position:absolute;bottom:0;left:0;right:0;padding:16px}
+.dc-reg{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:3px}
+.dc-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500}
+.dc:nth-child(1) .dc-name{font-size:1.7rem}
+
+/* ══ SLIDE 4 — ITINERARY ══ */
+.s-itinerary{background:var(--warm)}
+.s-itinerary .inner{text-align:center;max-width:1100px;padding:0 40px;width:100%}
+.timeline-s{display:flex;gap:0;position:relative;margin-top:44px}
+.timeline-s::before{content:'';position:absolute;top:24px;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--bright),var(--gold));opacity:0.3}
+.ts-step{flex:1;padding:0 16px;text-align:center;position:relative}
+.ts-dot{width:48px;height:48px;border-radius:50%;background:var(--mid);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto 16px;position:relative;z-index:1}
+.ts-time{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--bright);margin-bottom:6px}
+.ts-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:500;margin-bottom:6px}
+.ts-desc{font-size:0.75rem;color:rgba(255,255,255,0.45);line-height:1.6}
+
+/* ══ SLIDE 5 — SERVICES ══ */
+.s-services{background:linear-gradient(150deg,var(--dark) 0%,var(--warm) 100%)}
+.s-services .inner{width:100%;max-width:1200px;padding:0 40px}
+.exp-grid-s{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.ec{background:rgba(255,255,255,0.03);border:1px solid rgba(201,133,58,0.15);border-radius:14px;padding:28px 24px;transition:all 0.3s;position:relative;overflow:hidden}
+.ec:hover{border-color:rgba(201,133,58,0.35);transform:translateY(-3px)}
+.ec-icon{width:44px;height:44px;border-radius:12px;background:rgba(201,133,58,0.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:16px}
+.ec-num{position:absolute;top:16px;right:16px;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:rgba(201,133,58,0.06);line-height:1}
+.ec-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;margin-bottom:8px}
+.ec-desc{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.7}
+
+/* ══ SLIDE 6 — GALLERY ══ */
+.s-gallery{background:var(--deep)}
+.s-gallery .inner{width:100%;max-width:1200px;padding:0 40px}
+.gallery-row{display:flex;gap:10px;margin-top:28px;overflow:hidden}
+.gi{border-radius:12px;overflow:hidden;position:relative;flex:1;height:420px}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.gi:hover img{transform:scale(1.06)}
+.gi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,9,5,0.85) 0%,transparent 50%)}
+.gi-lbl{position:absolute;bottom:14px;left:14px;right:14px}
+.gi-lbl span{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:2px}
+.gi-lbl strong{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500}
+
+/* ══ SLIDE 7 — MANIFESTO ══ */
+.s-manifesto{background:var(--cream);color:var(--text)}
+.s-manifesto .inner{text-align:center;max-width:820px;padding:0 40px}
+.s-manifesto .slide-tag{color:var(--gold)}
+.s-manifesto .slide-h2{color:var(--dark)}
+.s-manifesto .slide-h2 em{color:var(--gold)}
+.manifesto-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:300;line-height:1.75;color:var(--text);font-style:italic;margin:28px 0 14px}
+.manifesto-author{font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:40px}
+.feat-row{display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
+.feat{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:150px}
+.feat-icon{width:40px;height:40px;border-radius:10px;background:rgba(201,133,58,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.feat p{font-size:0.76rem;text-align:center;color:var(--muted);line-height:1.6}
+
+/* ══ SLIDE 8 — TESTIMONIALS ══ */
+.s-testi{background:var(--warm)}
+.s-testi .inner{width:100%;max-width:1200px;padding:0 40px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.tc{background:rgba(255,255,255,0.04);border:1px solid rgba(201,133,58,0.13);border-radius:14px;padding:22px}
+.tc-stars{color:var(--bright);font-size:0.82rem;margin-bottom:10px;letter-spacing:2px}
+.tc-q{font-family:'Cormorant Garamond',serif;font-size:0.98rem;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.8);font-style:italic;margin-bottom:16px}
+.tc-auth{display:flex;align-items:center;gap:10px}
+.tc-av{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,133,58,0.3);flex-shrink:0}
+.tc-av img{width:100%;height:100%;object-fit:cover}
+.tc-name{font-size:0.8rem;font-weight:600;margin-bottom:1px}
+.tc-loc{font-size:0.67rem;color:rgba(255,255,255,0.35)}
+/* Row 2 centered */
+.testi-row2{display:flex;gap:16px;justify-content:center;margin-top:16px}
+.testi-row2 .tc{flex:0 0 calc(33.33% - 8px)}
+
+/* ══ SLIDE 9 — BOOKING ══ */
+.s-booking{
+  background:
+    linear-gradient(135deg,rgba(14,9,5,0.88) 0%,rgba(35,22,8,0.92) 100%),
+    url('./nbd-1.webp') center top/cover no-repeat;
+}
+.s-booking .inner{max-width:960px;padding:0 40px;width:100%}
+.s-booking .slide-h2{text-align:center;margin-bottom:32px}
+.tours-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+.tp{background:rgba(255,255,255,0.04);border:1px solid rgba(201,133,58,0.2);border-radius:12px;padding:18px;transition:all 0.3s;cursor:pointer}
+.tp:hover{border-color:var(--gold);background:rgba(201,133,58,0.06)}
+.tp-badge{display:inline-block;background:rgba(201,133,58,0.15);color:var(--bright);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-bottom:8px}
+.tp-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:500;margin-bottom:4px}
+.tp-meta{font-size:0.72rem;color:rgba(255,255,255,0.38);margin-bottom:8px}
+.tp-price{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--bright)}
+.tp-price small{font-family:'Inter',sans-serif;font-size:0.65rem;color:rgba(255,255,255,0.35);font-weight:400}
+.booking-cta{text-align:center}
+.booking-cta p{font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:16px}
+.cta-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* ══ SLIDE 10 — CONTACT ══ */
+.s-contact{
+  background:linear-gradient(135deg,var(--gold) 0%,#7a4820 100%);
+  position:relative;overflow:hidden;
+}
+.s-contact::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:rgba(255,255,255,0.04);top:-250px;left:-200px}
+.s-contact::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,0.04);bottom:-200px;right:-100px}
+.s-contact .inner{text-align:center;max-width:780px;z-index:1;padding:0 40px}
+.s-contact .slide-h2{margin-bottom:10px}
+.contact-sub{font-size:1rem;color:rgba(255,255,255,0.72);margin-bottom:48px}
+.contact-cards{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:40px}
+.cc{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:28px 32px;text-align:center;min-width:200px;backdrop-filter:blur(8px);transition:all 0.3s}
+.cc:hover{background:rgba(255,255,255,0.18);transform:translateY(-4px)}
+.cc-icon{font-size:2rem;margin-bottom:12px}
+.cc-label{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:8px}
+.cc-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500}
+.cc-val a{color:inherit;text-decoration:none}
+.contact-logo{margin:0 auto;display:block;height:52px;background:#fff;border-radius:10px;padding:5px 12px}
+.contact-tagline{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:10px;font-style:italic}
+
+/* ══ FADE IN ══ */
+.slide .inner>*{
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
+}
+.slide.is-active .inner>*{opacity:1;transform:translateY(0)}
+.slide.is-active .inner>*:nth-child(1){transition-delay:0.1s}
+.slide.is-active .inner>*:nth-child(2){transition-delay:0.2s}
+.slide.is-active .inner>*:nth-child(3){transition-delay:0.3s}
+.slide.is-active .inner>*:nth-child(4){transition-delay:0.4s}
+.slide.is-active .inner>*:nth-child(5){transition-delay:0.5s}
+.slide.is-active .inner>*:nth-child(6){transition-delay:0.6s}
+
+@media(max-width:900px){
+  .dest-grid-s{grid-template-columns:1fr 1fr}
+  .dc:nth-child(n){grid-column:span 1;aspect-ratio:4/3}
+  .exp-grid-s{grid-template-columns:1fr 1fr}
+  .gallery-row{gap:7px}
+  .gi{height:260px}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .testi-row2 .tc{flex:0 0 100%}
+  .tours-preview{grid-template-columns:1fr 1fr}
+  .contact-cards{gap:12px}
+  .cc{padding:20px 24px;min-width:160px}
+  .timeline-s{flex-direction:column;gap:20px}
+  .timeline-s::before{display:none}
+  .stats-row{flex-wrap:wrap}
+  .stat-item{flex:0 0 50%;border-right:none;border-bottom:1px solid rgba(201,133,58,0.2)}
+}
+@media(max-width:600px){
+  .exp-grid-s,.dest-grid-s,.tours-preview{grid-template-columns:1fr}
+  .gallery-row{flex-wrap:wrap}
+  .gi{flex:0 0 100%;height:200px}
+  .testi-grid{grid-template-columns:1fr}
+  .arrow-prev{left:8px}
+  .arrow-next{right:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGO -->
+<div class="logo-bar">
+  <img src="./Logo-PNG.png" alt="V Holiday Tour"/>
+</div>
+
+<!-- SLIDE COUNTER -->
+<div class="slide-counter"><strong id="cur">1</strong> / <span id="tot">10</span></div>
+
+<!-- SLIDE TITLE CHIP -->
+<div class="slide-title-chip" id="slideTitle">Trang Chủ</div>
+
+<!-- ARROWS -->
+<button class="arrow arrow-prev hidden" id="prevBtn" onclick="go(-1)">←</button>
+<button class="arrow arrow-next" id="nextBtn" onclick="go(1)">→</button>
+
+<!-- DOTS -->
+<div class="slide-dots" id="dots"></div>
+
+<!-- PROGRESS LINE -->
+<div class="progress-line" id="progressLine"></div>
+
+<!-- KEYBOARD HINT -->
+<div class="key-hint"><kbd>←</kbd><kbd>→</kbd> điều hướng &nbsp;·&nbsp; <kbd>ESC</kbd> đóng</div>
+
+<!-- ═══════════ SLIDES ═══════════ -->
+<div class="slider">
+<div class="slides-track" id="track">
+
+<!-- SLIDE 1 — COVER -->
+<div class="slide s-cover" data-title="Trang Chủ">
+  <div class="inner">
+    <div class="cover-badge">✦ V Holiday Tour — Vùng đất thiêng liêng miền Nam</div>
+    <h1 class="cover-title" style="font-family:'Cormorant Garamond',serif;font-weight:300">
+      Trải nghiệm
+      <em>Vùng Đất Tâm Linh</em>
+    </h1>
+    <p class="cover-sub">Núi Bà Đen huyền bí, Tòa Thánh Cao Đài linh thiêng — hành trình chạm đến những điều thiêng liêng ngay tại Tây Ninh.</p>
+    <div class="cover-actions">
+      <button class="btn-g" onclick="go(8)">Đặt Tour Ngay</button>
+      <button class="btn-o" onclick="go(1)">Khám Phá ↓</button>
+    </div>
+    <p class="cover-hotline">Hotline: <strong>(+84) 0886 131 139</strong> &nbsp;|&nbsp; Zalo: <strong>0886 131 139</strong></p>
+  </div>
+</div>
+
+<!-- SLIDE 2 — STATS -->
+<div class="slide s-stats" data-title="Tổng Quan">
+  <div class="inner">
+    <h2 class="stats-headline">Vì sao chọn <em>V Holiday Tour?</em></h2>
+    <p class="stats-sub">12 năm đồng hành cùng hàng chục nghìn lữ khách trên khắp Việt Nam</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">4.8★</div>
+        <div class="stat-lbl">Đánh Giá Trung Bình</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">50K+</div>
+        <div class="stat-lbl">Lữ Khách Hài Lòng</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-lbl">Năm Kinh Nghiệm</div>
+      </div>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-icon">✅</span> Xác nhận trong 2 giờ</div>
+      <div class="trust-item"><span class="trust-icon">🔄</span> Hủy miễn phí trước 48h</div>
+      <div class="trust-item"><span class="trust-icon">🛡️</span> Bảo hiểm chuyến đi</div>
+      <div class="trust-item"><span class="trust-icon">📞</span> Hỗ trợ 24/7</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — DESTINATIONS -->
+<div class="slide s-dest" data-title="Điểm Đến">
+  <div class="inner">
+    <span class="slide-tag">Khám Phá Tây Ninh 1 Ngày</span>
+    <h2 class="slide-h2">Những điểm đến <em>không thể bỏ qua</em></h2>
+    <div class="dest-grid-s">
+      <div class="dc">
+        <img src="./hero-bg.webp" alt="Núi Bà Đen" style="object-position:right center"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-reg">Tây Ninh • Điểm Chính</span>
+          <div class="dc-name">Núi Bà Đen</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="https://picsum.photos/seed/ornate-temple-colorful/600/750" alt="Tòa Thánh"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-reg">Di Sản Tâm Linh</span>
+          <div class="dc-name">Tòa Thánh Cao Đài</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="https://picsum.photos/seed/lake-morning-mist/600/450" alt="Hồ Dầu Tiếng"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-reg">Tây Ninh</span>
+          <div class="dc-name">Hồ Dầu Tiếng</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="https://picsum.photos/seed/jungle-trail-green/600/450" alt="Vườn QG"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-reg">Thiên Nhiên</span>
+          <div class="dc-name">Vườn QG Lò Gò</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="https://picsum.photos/seed/vietnamese-food-market/600/450" alt="Ẩm thực"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-reg">Đặc Sản</span>
+          <div class="dc-name">Ẩm Thực Trảng Bàng</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — ITINERARY -->
+<div class="slide s-itinerary" data-title="Lịch Trình">
+  <div class="inner">
+    <span class="slide-tag">Hành Trình Gợi Ý</span>
+    <h2 class="slide-h2">Một ngày <em>trọn vẹn</em> tại Tây Ninh</h2>
+    <div class="timeline-s">
+      <div class="ts-step">
+        <div class="ts-dot">🌄</div>
+        <div class="ts-time">05:30 — 08:00</div>
+        <div class="ts-title">Xuất Phát</div>
+        <p class="ts-desc">Xe đón tại nhà, di chuyển đến Tây Ninh trong buổi sáng bình yên.</p>
+      </div>
+      <div class="ts-step">
+        <div class="ts-dot">⛰️</div>
+        <div class="ts-time">08:00 — 12:00</div>
+        <div class="ts-title">Núi Bà Đen</div>
+        <p class="ts-desc">Cáp treo lên đỉnh, thăm Điện Bà, ngắm toàn cảnh 986m.</p>
+      </div>
+      <div class="ts-step">
+        <div class="ts-dot">🍜</div>
+        <div class="ts-time">12:00 — 13:30</div>
+        <div class="ts-title">Ẩm Thực</div>
+        <p class="ts-desc">Bánh canh, bánh tráng phơi sương — đặc sản nức tiếng vùng này.</p>
+      </div>
+      <div class="ts-step">
+        <div class="ts-dot">🏛️</div>
+        <div class="ts-time">14:00 — 16:30</div>
+        <div class="ts-title">Tòa Thánh Cao Đài</div>
+        <p class="ts-desc">Kiến trúc độc đáo, chứng kiến lễ cúng buổi chiều.</p>
+      </div>
+      <div class="ts-step">
+        <div class="ts-dot">🌅</div>
+        <div class="ts-time">17:00 — 20:00</div>
+        <div class="ts-title">Về TP.HCM</div>
+        <p class="ts-desc">Di chuyển về thành phố, mang theo những kỷ niệm đẹp.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — SERVICES -->
+<div class="slide s-services" data-title="Dịch Vụ">
+  <div class="inner">
+    <span class="slide-tag">Dịch Vụ</span>
+    <h2 class="slide-h2">Trải nghiệm <em>khác biệt</em></h2>
+    <div class="exp-grid-s">
+      <div class="ec">
+        <div class="ec-icon">📋</div><div class="ec-num">01</div>
+        <div class="ec-title">Lịch Trình Riêng</div>
+        <p class="ec-desc">Cá nhân hóa toàn bộ — thời gian, điểm dừng, phong cách theo ý bạn.</p>
+      </div>
+      <div class="ec">
+        <div class="ec-icon">✨</div><div class="ec-num">02</div>
+        <div class="ec-title">Trải Nghiệm Độc Quyền</div>
+        <p class="ec-desc">Thiền sáng sớm tại chân núi, nghi lễ cầu an riêng tư.</p>
+      </div>
+      <div class="ec">
+        <div class="ec-icon">🥾</div><div class="ec-num">03</div>
+        <div class="ec-title">Trekking</div>
+        <p class="ec-desc">Chinh phục Núi Bà Đen, khám phá Vườn QG qua đường rừng nguyên sinh.</p>
+      </div>
+      <div class="ec">
+        <div class="ec-icon">📸</div><div class="ec-num">04</div>
+        <div class="ec-title">Photo Tour</div>
+        <p class="ec-desc">Săn bình minh trên đỉnh núi với hướng dẫn nhiếp ảnh chuyên nghiệp.</p>
+      </div>
+      <div class="ec">
+        <div class="ec-icon">🍜</div><div class="ec-num">05</div>
+        <div class="ec-title">Food & Culture</div>
+        <p class="ec-desc">Bánh canh Trảng Bàng, muối ớt Tây Ninh — hành trình ẩm thực.</p>
+      </div>
+      <div class="ec">
+        <div class="ec-icon">🧭</div><div class="ec-num">06</div>
+        <div class="ec-title">Off The Beaten Path</div>
+        <p class="ec-desc">Chùa ẩn trong rừng, suối hoang sơ — chỉ người địa phương mới biết.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — GALLERY -->
+<div class="slide s-gallery" data-title="Thư Viện">
+  <div class="inner">
+    <span class="slide-tag">Thư Viện Ảnh</span>
+    <h2 class="slide-h2">Nhìn từ <em>góc nhìn khác</em></h2>
+    <div class="gallery-row">
+      <div class="gi" style="flex:1.4">
+        <img src="./hero-bg.webp" alt="" style="object-position:right center"/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Núi Bà Đen</span><strong>Tượng Phật Bà</strong></div>
+      </div>
+      <div class="gi">
+        <img src="./nbd-1.webp" alt="" style="object-position:center top"/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Núi Bà Đen</span><strong>Tượng Di Lặc</strong></div>
+      </div>
+      <div class="gi">
+        <img src="https://picsum.photos/seed/caodai-ornate-temple/560/740" alt=""/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Tòa Thánh</span><strong>Cao Đài</strong></div>
+      </div>
+      <div class="gi">
+        <img src="https://picsum.photos/seed/lake-sunset-still/560/740" alt=""/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Tây Ninh</span><strong>Hồ Dầu Tiếng</strong></div>
+      </div>
+      <div class="gi">
+        <img src="https://picsum.photos/seed/forest-path-light/560/740" alt=""/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Vườn QG</span><strong>Lò Gò Xa Mát</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — MANIFESTO -->
+<div class="slide s-manifesto" data-title="Về Chúng Tôi">
+  <div class="inner">
+    <span class="slide-tag">Triết Lý</span>
+    <h2 class="slide-h2" style="font-family:'Cormorant Garamond',serif;font-weight:400">Chúng tôi tin vào <em>sức mạnh của sự tĩnh lặng</em></h2>
+    <p class="manifesto-quote">"Không phải nơi nào cũng có thể chữa lành — nhưng Tây Ninh có. Giữa làn khói nhang và tiếng chuông ngân, bạn sẽ tìm lại chính mình."</p>
+    <p class="manifesto-author">— V Holiday Tour, từ 2012</p>
+    <div class="feat-row">
+      <div class="feat"><div class="feat-icon">🌿</div><p>Tôn trọng không gian thiêng liêng và văn hóa địa phương</p></div>
+      <div class="feat"><div class="feat-icon">🤝</div><p>Kết nối chân thực với cộng đồng Cao Đài bản địa</p></div>
+      <div class="feat"><div class="feat-icon">💡</div><p>Hướng dẫn viên am hiểu lịch sử, tâm linh Tây Ninh</p></div>
+      <div class="feat"><div class="feat-icon">🛡️</div><p>Hỗ trợ 24/7, an toàn là ưu tiên hàng đầu</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — TESTIMONIALS -->
+<div class="slide s-testi" data-title="Đánh Giá">
+  <div class="inner">
+    <span class="slide-tag">Cảm Nhận</span>
+    <h2 class="slide-h2">Lữ khách <em>nói gì</em></h2>
+    <div class="testi-grid">
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Bình minh trên đỉnh núi, tiếng chuông chùa vang vọng — tôi chưa bao giờ cảm thấy bình yên đến vậy."</p>
+        <div class="tc-auth"><div class="tc-av"><img src="https://picsum.photos/seed/viet-woman-1/88/88" alt=""/></div><div><div class="tc-name">Nguyễn Thị Lan Anh</div><div class="tc-loc">TP. Hồ Chí Minh</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Hướng dẫn viên rất am hiểu về lịch sử Cao Đài. Tôi đã ở lại xem lễ cúng buổi chiều và không thể rời đi."</p>
+        <div class="tc-auth"><div class="tc-av"><img src="https://picsum.photos/seed/viet-man-2/88/88" alt=""/></div><div><div class="tc-name">Trần Văn Minh</div><div class="tc-loc">Hà Nội</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Bánh canh Trảng Bàng ngon nhất tôi từng ăn! Lịch trình rất hợp lý, không vội vàng."</p>
+        <div class="tc-auth"><div class="tc-av"><img src="https://picsum.photos/seed/viet-woman-3/88/88" alt=""/></div><div><div class="tc-name">Lê Thị Hương Giang</div><div class="tc-loc">Đà Nẵng</div></div></div>
+      </div>
+    </div>
+    <div class="testi-row2">
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Đã đi Tây Ninh nhiều lần nhưng đây là lần đầu tôi thực sự hiểu về vùng đất này."</p>
+        <div class="tc-auth"><div class="tc-av"><img src="https://picsum.photos/seed/viet-man-4/88/88" alt=""/></div><div><div class="tc-name">Phạm Quốc Huy</div><div class="tc-loc">Bình Dương</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Tour Trekking Núi Bà Đen hoàn toàn xứng đáng! Nhất định sẽ quay lại."</p>
+        <div class="tc-auth"><div class="tc-av"><img src="https://picsum.photos/seed/viet-woman-5/88/88" alt=""/></div><div><div class="tc-name">Võ Thị Thanh Mai</div><div class="tc-loc">Cần Thơ</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — BOOKING -->
+<div class="slide s-booking" data-title="Đặt Tour">
+  <div class="inner">
+    <span class="slide-tag" style="text-align:center;display:block">Đặt Tour</span>
+    <h2 class="slide-h2">Chọn hành trình <em>của bạn</em></h2>
+    <div class="tours-preview">
+      <div class="tp"><span class="tp-badge">Bán Chạy</span><div class="tp-name">Núi Bà Đen 1 Ngày</div><div class="tp-meta">⏱ 1 ngày &nbsp;·&nbsp; 👥 ≤ 20 người</div><div class="tp-price">650.000đ <small>/người</small></div></div>
+      <div class="tp"><span class="tp-badge">Trọn Gói</span><div class="tp-name">Tây Ninh 2N1Đ</div><div class="tp-meta">⏱ 2 ngày 1 đêm &nbsp;·&nbsp; 👥 ≤ 20 người</div><div class="tp-price">1.200.000đ <small>/người</small></div></div>
+      <div class="tp"><span class="tp-badge">Trekking</span><div class="tp-name">Vườn Quốc Gia</div><div class="tp-meta">⏱ 1 ngày &nbsp;·&nbsp; 👥 ≤ 12 người</div><div class="tp-price">750.000đ <small>/người</small></div></div>
+      <div class="tp"><span class="tp-badge">Văn Hóa</span><div class="tp-name">Tòa Thánh Cao Đài</div><div class="tp-meta">⏱ Nửa ngày &nbsp;·&nbsp; 👥 ≤ 15 người</div><div class="tp-price">450.000đ <small>/người</small></div></div>
+      <div class="tp"><span class="tp-badge">Ẩm Thực</span><div class="tp-name">Food & Culture</div><div class="tp-meta">⏱ Nửa ngày &nbsp;·&nbsp; 👥 ≤ 15 người</div><div class="tp-price">550.000đ <small>/người</small></div></div>
+      <div class="tp"><span class="tp-badge">Photo Tour</span><div class="tp-name">Săn Bình Minh</div><div class="tp-meta">⏱ 1 ngày &nbsp;·&nbsp; 👥 ≤ 8 người</div><div class="tp-price">800.000đ <small>/người</small></div></div>
+    </div>
+    <div class="booking-cta">
+      <p>Đặt tour nhanh — xác nhận trong 2 giờ làm việc</p>
+      <div class="cta-row">
+        <a href="tel:+840886131139" class="btn-g" style="text-decoration:none;padding:13px 32px;border-radius:100px;font-weight:600;font-size:0.86rem">📞 Gọi Ngay</a>
+        <a href="https://zalo.me/0886131139" target="_blank" class="btn-o" style="text-decoration:none;padding:13px 32px;border-radius:100px;font-size:0.86rem;border:1px solid rgba(255,255,255,0.3);color:#fff">💬 Zalo Ngay</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10 — CONTACT -->
+<div class="slide s-contact" data-title="Liên Hệ">
+  <div class="inner">
+    <h2 class="slide-h2" style="font-family:'Cormorant Garamond',serif;font-weight:300;color:#fff;margin-bottom:8px">Sẵn sàng <em style="color:rgba(255,255,255,0.85);font-style:italic">đồng hành</em> cùng bạn</h2>
+    <p class="contact-sub">Liên hệ ngay hôm nay — chúng tôi luôn sẵn sàng lắng nghe và tư vấn miễn phí.</p>
+    <div class="contact-cards">
+      <div class="cc">
+        <div class="cc-icon">📞</div>
+        <div class="cc-label">Hotline</div>
+        <div class="cc-val"><a href="tel:+840886131139">(+84) 0886 131 139</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-icon">💬</div>
+        <div class="cc-label">Zalo</div>
+        <div class="cc-val"><a href="https://zalo.me/0886131139" target="_blank">0886 131 139</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-icon">📧</div>
+        <div class="cc-label">Email</div>
+        <div class="cc-val"><a href="mailto:info@vholidaytour.com">info@vholidaytour.com</a></div>
+      </div>
+      <div class="cc">
+        <div class="cc-icon">🕐</div>
+        <div class="cc-label">Giờ Làm Việc</div>
+        <div class="cc-val" style="font-size:1.1rem">7:00 — 21:00</div>
+      </div>
+    </div>
+    <img src="./Logo-PNG.png" class="contact-logo" alt="V Holiday Tour"/>
+    <p class="contact-tagline">Nâng tầm giá trị cuộc sống qua từng hành trình</p>
+  </div>
+</div>
+
+</div><!-- end slides-track -->
+</div><!-- end slider -->
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const track  = document.getElementById('track');
+const prevBtn= document.getElementById('prevBtn');
+const nextBtn= document.getElementById('nextBtn');
+const curEl  = document.getElementById('cur');
+const totEl  = document.getElementById('tot');
+const titleEl= document.getElementById('slideTitle');
+const dotsEl = document.getElementById('dots');
+const progEl = document.getElementById('progressLine');
+
+let cur = 0;
+const total = slides.length;
+totEl.textContent = total;
+
+// Build dots
+slides.forEach((_,i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i===0?' active':'');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(idx) {
+  slides[cur].classList.remove('is-active');
+  cur = Math.max(0, Math.min(total-1, idx));
+  track.style.transform = `translateX(-${cur * 100}vw)`;
+  slides[cur].classList.add('is-active');
+  // Update UI
+  curEl.textContent = cur+1;
+  titleEl.textContent = slides[cur].dataset.title || '';
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  prevBtn.classList.toggle('hidden', cur===0);
+  nextBtn.classList.toggle('hidden', cur===total-1);
+  // Progress bar
+  progEl.style.width = ((cur/(total-1))*100) + '%';
+}
+
+function go(dir) { goTo(cur+dir); }
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+  if (e.key==='Escape') window.close();
+  if (e.key==='Home') goTo(0);
+  if (e.key==='End') goTo(total-1);
+});
+
+// Touch swipe
+let tx=0;
+document.addEventListener('touchstart', e => tx=e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = tx - e.changedTouches[0].clientX;
+  if (Math.abs(dx)>50) go(dx>0?1:-1);
+}, {passive:true});
+
+// Init
+goTo(0);
+</script>
+</body>
+</html>
