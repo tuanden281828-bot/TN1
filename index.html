@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>V Holiday Tour — Nâng Tầm Giá Trị Cuộc Sống</title>
+<meta name="description" content="Khám phá Việt Nam với những hành trình du lịch độc đáo — Hạ Long, Hội An, Sapa, Phú Quốc và hàng trăm điểm đến tuyệt vời."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%232563a8'/><path d='M22 30 L50 75 L78 30' stroke='white' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#c8102e;--red2:#a00d24;--red-light:rgba(200,16,46,.1);
+  --gold:#e6a817;--gold2:#c9910f;--gold-light:rgba(230,168,23,.12);
+  --green:#2d6a4f;--green2:#1b4332;
+  --dark:#0f1923;--dark2:#162030;--dark3:#1e2d3d;
+  --text:#1a1a2e;--muted:#6b7280;--light:#f8fafc;
+  --cream:#fdf8f0;--white:#ffffff;
+  --border:rgba(0,0,0,.08);
+  --shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.14);
+  --r:16px;--r-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--text);overflow-x:hidden;line-height:1.65}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px}
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;z-index:99999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .6s,visibility .6s}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#fff;text-align:center;line-height:1.1}
+.ld-logo span{color:var(--gold)}
+.ld-bar{width:220px;height:3px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+.ld-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));animation:ldFill 1.5s ease forwards}
+@keyframes ldFill{from{width:0}to{width:100%}}
+.ld-txt{font-size:13px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase}
+
+/* ── UTILS ── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-sm{padding:70px 0}
+.text-center{text-align:center}
+.tag-label{display:inline-flex;align-items:center;gap:7px;padding:6px 18px;border-radius:99px;background:var(--red-light);border:1px solid rgba(200,16,46,.2);color:var(--red);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,52px);font-weight:900;line-height:1.15;margin-bottom:14px;color:var(--text)}
+.section-sub{font-size:16px;color:var(--muted);max-width:580px;margin:0 auto 56px;line-height:1.8}
+.gold{color:var(--gold)}
+.red{color:var(--red)}
+.italic{font-style:italic}
+
+/* reveal animations */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+.rvl{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.rvl.on{opacity:1;transform:none}
+.rvr{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.rvr.on{opacity:1;transform:none}
+.rvs{opacity:0;transform:scale(.92);transition:opacity .7s ease,transform .7s ease}
+.rvs.on{opacity:1;transform:none}
+
+/* ── NAVBAR ── */
+#navbar{position:fixed;top:0;width:100%;z-index:800;transition:all .4s}
+#navbar.scrolled{background:rgba(15,25,35,.95);backdrop-filter:blur(20px);box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center}
+.logo-img{height:56px;object-fit:contain;background:#fff;border-radius:10px;padding:4px 14px;box-shadow:0 2px 14px rgba(0,0,0,.22);transition:transform .2s}
+.logo:hover .logo-img{transform:scale(1.03)}
+.footer-logo-img{height:60px;padding:5px 16px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.35)}
+.ld-logo-img{height:80px;object-fit:contain;background:#fff;border-radius:14px;padding:8px 24px;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{padding:8px 16px;border-radius:99px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75);transition:all .2s}
+.nav-link:hover,.nav-link.active-link{color:#fff;background:rgba(255,255,255,.1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-outline{padding:9px 22px;border-radius:99px;border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:14px;font-weight:600;transition:all .2s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.btn-primary{padding:10px 24px;border-radius:99px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(200,16,46,.4);transition:all .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,16,46,.5)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.on span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.on span:nth-child(2){opacity:0}
+.hamburger.on span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob-menu{display:none;position:fixed;top:72px;inset-x:0;background:rgba(15,25,35,.97);backdrop-filter:blur(20px);padding:20px 24px 32px;flex-direction:column;gap:4px;z-index:799;border-bottom:1px solid rgba(255,255,255,.08)}
+.mob-menu.on{display:flex}
+.mob-menu a{padding:12px 16px;border-radius:12px;font-size:15px;font-weight:500;color:rgba(255,255,255,.7);transition:all .2s}
+.mob-menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.mob-menu .mob-cta{margin-top:10px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-weight:700;text-align:center;border-radius:12px;padding:14px}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:var(--dark)}
+.hero-bg{position:absolute;inset:0;background:
+  linear-gradient(135deg,rgba(15,25,35,.9) 0%,rgba(15,25,35,.6) 50%,rgba(15,25,35,.4) 100%),
+  linear-gradient(0deg,#0f1923 0%,transparent 40%)}
+/* Hero real image */
+.hero-scenery{position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1920&q=85&fit=crop&crop=center') center/cover no-repeat;
+  animation:slowZoom 14s ease-in-out infinite alternate}
+@keyframes slowZoom{0%{transform:scale(1)}100%{transform:scale(1.07)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,25,35,.88) 0%,rgba(15,25,35,.65) 60%,rgba(0,0,0,.3) 100%)}
+.hero-content{position:relative;z-index:2;max-width:700px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 20px;border-radius:99px;background:rgba(230,168,23,.15);border:1px solid rgba(230,168,23,.35);color:#f0c94a;font-size:13px;font-weight:600;margin-bottom:28px;letter-spacing:.5px}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold);animation:blink 1.8s ease infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(230,168,23,.5)}60%{opacity:.6;box-shadow:0 0 0 6px rgba(230,168,23,0)}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,72px);font-weight:900;color:#fff;line-height:1.08;margin-bottom:20px}
+.hero-title .line2{color:var(--gold);font-style:italic}
+.hero-desc{font-size:17px;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:40px;max-width:540px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:99px;background:linear-gradient(135deg,var(--red),#e63950);color:#fff;font-weight:800;font-size:16px;box-shadow:0 8px 28px rgba(200,16,46,.45);transition:all .25s}
+.btn-hero-primary:hover{transform:translateY(-3px);box-shadow:0 14px 42px rgba(200,16,46,.6)}
+.btn-hero-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:99px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:16px;transition:all .25s}
+.btn-hero-ghost:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+/* hero stats */
+.hero-stats{display:flex;gap:36px;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:#fff;line-height:1}
+.hstat-num sup{font-size:18px}
+.hstat-lbl{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:.5px}
+.hstat-divider{width:1px;background:rgba(255,255,255,.15);align-self:stretch;margin:4px 0}
+/* hero search */
+.hero-search{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:0 24px 0}
+.search-box{max-width:1000px;margin:0 auto;background:#fff;border-radius:20px 20px 0 0;padding:28px 32px;box-shadow:0 -8px 40px rgba(0,0,0,.2);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:16px;align-items:end}
+.search-field{display:flex;flex-direction:column;gap:6px}
+.search-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.search-field select,.search-field input{padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border .2s;background:#fff}
+.search-field select:focus,.search-field input:focus{border-color:var(--red)}
+.btn-search{padding:13px 32px;border-radius:10px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:all .2s}
+.btn-search:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(200,16,46,.4)}
+/* scroll indicator */
+.scroll-ind{position:absolute;bottom:100px;right:40px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.6);opacity:.4}}
+
+/* ── STATS BAND ── */
+.stats-band{background:linear-gradient(135deg,var(--red),var(--red2));padding:20px 0;margin-top:-1px}
+.stats-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.stat-item{text-align:center;flex:1;min-width:120px}
+.stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff}
+.stat-label{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
+.stat-sep{width:1px;height:40px;background:rgba(255,255,255,.2)}
+
+/* ── DESTINATIONS ── */
+.destinations{background:var(--cream)}
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.dest-card{border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;group}
+.dest-card:nth-child(1){grid-column:span 2;grid-row:span 2}
+.dest-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden}
+.dest-card:nth-child(1) .dest-img{aspect-ratio:auto;height:100%}
+.dest-gradient{position:absolute;inset:0;transition:transform .5s ease}
+.dest-card:hover .dest-gradient{transform:scale(1.07)}
+/* Destination card image base */
+.dest-gradient{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+/* Overlay icons/decoration on dest cards */
+.dest-deco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.15;font-size:80px;transition:opacity .3s}
+.dest-card:hover .dest-deco{opacity:.22}
+.dest-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 60%,transparent 100%);padding:28px 22px 22px;transition:all .3s}
+.dest-badge{display:inline-block;padding:3px 10px;border-radius:99px;background:rgba(230,168,23,.9);color:#1a0f00;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.dest-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+.dest-card:nth-child(1) .dest-name{font-size:28px}
+.dest-location{font-size:12px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:5px}
+.dest-hover-info{position:absolute;inset:0;background:rgba(200,16,46,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;padding:20px;text-align:center}
+.dest-card:hover .dest-hover-info{opacity:1}
+.dest-hover-info .dh-ico{font-size:40px;margin-bottom:12px}
+.dest-hover-info p{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;margin-bottom:16px}
+.dest-hover-info .dh-btn{padding:9px 22px;border-radius:99px;background:#fff;color:var(--red);font-weight:700;font-size:13px}
+.dest-more-btn{grid-column:1/-1;text-align:center;margin-top:12px}
+
+/* ── TOURS ── */
+.tours-sec{background:#fff}
+.tours-filter{display:flex;gap:10px;justify-content:center;margin-bottom:48px;flex-wrap:wrap}
+.filter-btn{padding:9px 22px;border-radius:99px;font-size:14px;font-weight:600;border:1.5px solid var(--border);color:var(--muted);transition:all .2s;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
+.tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.tour-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);transition:all .35s;background:#fff}
+.tour-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(200,16,46,.15)}
+.tour-thumb{position:relative;overflow:hidden;aspect-ratio:4/3}
+.tour-thumb-bg{position:absolute;inset:0;transition:transform .5s ease}
+.tour-card:hover .tour-thumb-bg{transform:scale(1.06)}
+.tour-thumb-bg{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.tour-thumb-ico{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.2}
+.tour-badge{position:absolute;top:14px;left:14px;padding:5px 14px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.badge-hot{background:var(--red);color:#fff}
+.badge-new{background:#10b981;color:#fff}
+.badge-sale{background:var(--gold);color:#1a0f00}
+.tour-fav{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:all .2s}
+.tour-fav:hover{transform:scale(1.15)}
+.tour-rating{position:absolute;bottom:14px;right:14px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:99px;color:#fff;font-size:12px;font-weight:600}
+.tour-rating .stars{color:var(--gold)}
+.tour-body{padding:20px}
+.tour-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.tour-tag{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;background:var(--red-light);color:var(--red)}
+.tour-duration{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.tour-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3}
+.tour-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.tour-includes{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.tour-inc{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+.tour-inc i{color:var(--green);font-size:11px}
+.tour-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border)}
+.tour-price-old{font-size:12px;color:var(--muted);text-decoration:line-through;margin-bottom:2px}
+.tour-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--red)}
+.tour-price sup{font-size:14px}
+.tour-price-unit{font-size:12px;color:var(--muted);font-family:'Be Vietnam Pro',sans-serif}
+.btn-book{padding:10px 20px;border-radius:99px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:13px;font-weight:700;transition:all .2s;display:flex;align-items:center;gap:6px}
+.btn-book:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(200,16,46,.35)}
+
+/* ── WHY CHOOSE US ── */
+.why-sec{background:var(--cream)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.why-visual{position:relative}
+.why-img-main{border-radius:24px;overflow:hidden;aspect-ratio:4/5}
+.why-bg-main{width:100%;height:100%;background:linear-gradient(160deg,#1a4a5e 0%,#2d8a7e 35%,#1b6a5a 65%,#0d3330 100%);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.6}
+.why-img-float{position:absolute;bottom:-30px;right:-30px;width:200px;border-radius:16px;overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow-lg);aspect-ratio:1}
+.why-float-bg{width:100%;height:100%;background:linear-gradient(145deg,#8b6914,#c9a227,#f5d76e);display:flex;align-items:center;justify-content:center;font-size:60px;opacity:.7}
+.why-badge-float{position:absolute;top:-20px;left:-20px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+.wbf-ico{width:44px;height:44px;border-radius:12px;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-size:22px}
+.wbf-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text);line-height:1}
+.wbf-lbl{font-size:11px;color:var(--muted)}
+.why-features{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.why-feat{background:#fff;border-radius:var(--r-sm);padding:20px;border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start;transition:all .3s}
+.why-feat:hover{border-color:rgba(200,16,46,.2);box-shadow:var(--shadow);transform:translateY(-3px)}
+.wf-ico{width:44px;height:44px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.wf-ico.red{background:var(--red-light)}
+.wf-ico.gold{background:var(--gold-light)}
+.wf-ico.green{background:rgba(45,106,79,.1)}
+.wf-ico.blue{background:rgba(37,99,235,.1)}
+.wf-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.wf-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ── GALLERY ── */
+.gallery-sec{background:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(3,160px);gap:14px}
+.gal-item{border-radius:12px;overflow:hidden;position:relative;cursor:pointer}
+.gal-item .gi-bg{position:absolute;inset:0;transition:transform .5s ease}
+.gal-item:hover .gi-bg{transform:scale(1.08)}
+.gal-item .gi-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);transition:all .3s;display:flex;align-items:center;justify-content:center}
+.gal-item:hover .gi-overlay{background:rgba(200,16,46,.5)}
+.gal-item:hover .gi-overlay i{opacity:1;transform:scale(1)}
+.gal-item .gi-overlay i{font-size:28px;color:#fff;opacity:0;transform:scale(.7);transition:all .3s}
+.g1{grid-column:span 4;grid-row:span 2;background:linear-gradient(155deg,#1a4a5e,#2d8a7e,#0d4a3a)}
+.g2{grid-column:span 4;background:linear-gradient(145deg,#8b6914,#c9a227,#f5d76e)}
+.g3{grid-column:span 4;background:linear-gradient(150deg,#c8102e,#8b1a28)}
+.g4{grid-column:span 4;background:linear-gradient(155deg,#2c5f2e,#4a8c35,#6ab04c)}
+.g5{grid-column:span 4;background:linear-gradient(145deg,#1b4f72,#2980b9,#85c1e9)}
+.g6{grid-column:span 6;grid-row:span 1;background:linear-gradient(140deg,#5b3427,#a0522d,#c87941)}
+.g7{grid-column:span 6;background:linear-gradient(145deg,#1a3a6c,#2857a7,#4a90d9)}
+.g8{grid-column:span 4;grid-row:span 1;background:linear-gradient(150deg,#2d6a4f,#1b4332)}
+
+/* ── TESTIMONIALS ── */
+.testi-sec{background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 100%);position:relative;overflow:hidden}
+.testi-sec::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,16,46,.15),transparent 70%);pointer-events:none}
+.testi-sec::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(230,168,23,.08),transparent 70%);pointer-events:none}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.testi-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:26px;transition:all .3s;position:relative;overflow:hidden}
+.testi-card:hover{border-color:rgba(200,16,46,.3);background:rgba(200,16,46,.06);transform:translateY(-4px)}
+.testi-card::before{content:'\201C';position:absolute;top:-10px;right:18px;font-size:100px;font-family:'Playfair Display',serif;color:rgba(230,168,23,.1);line-height:1}
+.testi-stars{color:var(--gold);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+.testi-text{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:20px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:13px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px}
+.testi-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}
+.testi-name{font-size:14px;font-weight:700;color:#fff}
+.testi-role{font-size:12px;color:rgba(255,255,255,.4)}
+.testi-trip{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gold);margin-top:3px}
+
+/* ── TRAVEL TIPS ── */
+.tips-sec{background:var(--cream)}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.tip-card{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);transition:all .3s}
+.tip-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.tip-thumb{aspect-ratio:3/2;position:relative;overflow:hidden}
+.tip-thumb-bg{position:absolute;inset:0;transition:transform .5s}
+.tip-card:hover .tip-thumb-bg{transform:scale(1.06)}
+.tip-cat{position:absolute;top:14px;left:14px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.9);font-size:11px;font-weight:700;color:var(--red);letter-spacing:.5px}
+.tip-body{padding:20px}
+.tip-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);margin-bottom:10px}
+.tip-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4}
+.tip-title:hover{color:var(--red)}
+.tip-excerpt{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.tip-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--red);transition:gap .2s}
+.tip-link:hover{gap:10px}
+
+/* ── NEWSLETTER ── */
+.newsletter-sec{background:linear-gradient(135deg,var(--red) 0%,#8b0d1e 100%);padding:80px 0;position:relative;overflow:hidden}
+.newsletter-sec::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none}
+.newsletter-sec::after{content:'';position:absolute;bottom:-40%;left:-5%;width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.nl-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;text-align:center}
+.nl-icon{font-size:52px;margin-bottom:20px}
+.nl-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;margin-bottom:12px}
+.nl-sub{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:34px;line-height:1.7}
+.nl-form{display:flex;gap:0;max-width:480px;margin:0 auto}
+.nl-input{flex:1;padding:15px 20px;border:none;border-radius:99px 0 0 99px;font-size:15px;font-family:inherit;outline:none;color:var(--text)}
+.nl-btn{padding:15px 28px;border-radius:0 99px 99px 0;background:var(--gold);color:#1a0f00;font-weight:800;font-size:15px;transition:all .2s;white-space:nowrap}
+.nl-btn:hover{background:#f5ba1a;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.nl-note{font-size:12px;color:rgba(255,255,255,.5);margin-top:14px}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:72px 0 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:56px}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.8;margin:16px 0 22px}
+.footer-social{display:flex;gap:10px}
+.soc-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:15px;transition:all .2s}
+.soc-btn:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-3px)}
+.footer-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.25);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.45);transition:color .2s;display:flex;align-items:center;gap:7px}
+.footer-links a:hover{color:#fff}
+.footer-links a i{font-size:11px;color:var(--red)}
+.footer-contact{display:flex;flex-direction:column;gap:14px}
+.fc-item{display:flex;gap:11px;align-items:flex-start}
+.fc-icon{width:34px;height:34px;border-radius:9px;background:rgba(200,16,46,.15);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:14px;flex-shrink:0;margin-top:1px}
+.fc-text{font-size:13px;color:rgba(255,255,255,.45);line-height:1.5}
+.fc-text strong{color:rgba(255,255,255,.7);display:block;font-size:12px;margin-bottom:2px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.25)}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:13px;color:rgba(255,255,255,.25);transition:color .2s}
+.footer-bottom-links a:hover{color:rgba(255,255,255,.6)}
+
+/* ── BOOKING MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);z-index:9000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.on{display:flex}
+.modal-box{background:#fff;border-radius:24px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:mPop .35s cubic-bezier(.34,1.4,.64,1)}
+@keyframes mPop{from{transform:scale(.85) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.modal-header{background:linear-gradient(135deg,var(--red),var(--red2));padding:28px 32px;border-radius:24px 24px 0 0;position:relative}
+.modal-header h3{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:700;margin-bottom:4px}
+.modal-header p{font-size:13px;color:rgba(255,255,255,.7)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,.3)}
+.modal-body{padding:28px 32px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
+.form-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border .2s}
+.form-input:focus{border-color:var(--red)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-submit{width:100%;padding:15px;border-radius:99px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:15px;font-weight:800;cursor:pointer;border:none;font-family:inherit;margin-top:8px;box-shadow:0 6px 20px rgba(200,16,46,.35);transition:all .25s}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(200,16,46,.5)}
+
+/* ── VHT LOGO COMPONENT ── */
+.vht-logo{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:6px 16px 6px 8px;box-shadow:0 3px 16px rgba(0,0,0,.2);transition:transform .2s}
+.logo:hover .vht-logo{transform:scale(1.02)}
+.vht-circle{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#7fbde0 0%,#2563a8 55%,#1a3d7c 100%);border:2px solid #b8d8f0;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden;box-shadow:inset 0 -3px 8px rgba(0,0,0,.25),0 3px 10px rgba(26,77,140,.35)}
+.vht-circle::before{content:'';position:absolute;top:5px;left:7px;width:55%;height:30%;background:rgba(255,255,255,.28);border-radius:50%;transform:rotate(-15deg)}
+.vht-v-svg{position:relative;z-index:1}
+.vht-wordmark{line-height:1.25}
+.vht-name{font-family:'Arial Black',Impact,'Franklin Gothic Heavy',sans-serif;font-size:17px;font-weight:900;color:#1a4d8c;letter-spacing:.5px;display:flex;align-items:baseline;gap:3px;text-shadow:1px 1px 0 rgba(168,212,240,.6)}
+.vht-com{font-size:12px;color:#2563a8;font-weight:700;font-family:Arial,sans-serif}
+.vht-reg{font-size:9px;vertical-align:super;color:#2563a8;margin-left:1px}
+.vht-tagline{font-size:10.5px;color:#3a7bc8;font-style:italic;font-family:Georgia,'Times New Roman',serif;white-space:nowrap;margin-top:2px}
+/* loader logo version */
+.vht-logo-lg{gap:14px;padding:10px 24px 10px 12px;border-radius:16px}
+.vht-logo-lg .vht-circle{width:60px;height:60px}
+.vht-logo-lg .vht-name{font-size:22px}
+.vht-logo-lg .vht-com{font-size:15px}
+.vht-logo-lg .vht-tagline{font-size:13px}
+
+/* ── SCROLL PROGRESS ── */
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),#e63950);z-index:9999;width:0;transition:width .08s linear;pointer-events:none}
+
+/* ── NAV HOTLINE ── */
+.nav-hotline{display:flex;align-items:center;gap:6px;color:var(--gold);font-size:13px;font-weight:700;white-space:nowrap;padding:6px 14px;border-radius:99px;border:1px solid rgba(230,168,23,.3);background:rgba(230,168,23,.08)}
+.nav-hotline i{font-size:11px;animation:ringAnim 2.5s ease infinite}
+@keyframes ringAnim{0%,85%,100%{transform:rotate(0)}88%{transform:rotate(-15deg)}92%{transform:rotate(15deg)}96%{transform:rotate(-8deg)}}
+
+/* ── FLOATING CONTACT ── */
+.float-btns{position:fixed;right:24px;bottom:90px;z-index:499;display:flex;flex-direction:column;gap:10px;align-items:center}
+.fb-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:all .25s;text-decoration:none;position:relative}
+.fb-btn::before{content:attr(data-tip);position:absolute;right:58px;background:rgba(0,0,0,.75);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Be Vietnam Pro',sans-serif}
+.fb-btn:hover::before{opacity:1}
+.fb-btn:hover{transform:scale(1.12) translateX(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.fb-phone{background:linear-gradient(135deg,var(--red),var(--red2));animation:fbPulse 2.5s ease infinite}
+.fb-zalo{background:linear-gradient(135deg,#0068ff,#004fcb);font-weight:900;font-size:16px;font-family:sans-serif}
+.fb-wa{background:linear-gradient(135deg,#25d366,#128c4a)}
+@keyframes fbPulse{0%,80%,100%{box-shadow:0 4px 16px rgba(0,0,0,.25)}90%{box-shadow:0 4px 16px rgba(0,0,0,.25),0 0 0 8px rgba(200,16,46,.2)}}
+.fb-label{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.5px;font-family:'Be Vietnam Pro',sans-serif}
+
+/* ── GALLERY LIGHTBOX ── */
+.gal-item{cursor:zoom-in}
+
+/* ── BACK TO TOP ── */
+#back-top{position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(200,16,46,.45);opacity:0;transform:translateY(14px);transition:all .35s;z-index:500}
+#back-top.on{opacity:1;transform:none}
+#back-top:hover{transform:translateY(-3px) scale(1.08)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .dest-grid{grid-template-columns:repeat(2,1fr)}
+  .dest-card:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .dest-card:nth-child(1) .dest-img{aspect-ratio:16/7}
+  .tours-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr;gap:44px}
+  .why-visual{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .search-box{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-hotline{display:none}
+  .hamburger{display:flex}
+  .vht-logo{padding:5px 12px 5px 6px}
+  .vht-name{font-size:14px}
+  .vht-tagline{font-size:9.5px}
+  .vht-circle{width:38px;height:38px}
+}
+@media(max-width:768px){
+  .section{padding:72px 0}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .gallery-grid > div{grid-column:span 1 !important;grid-row:span 1 !important;aspect-ratio:1}
+  .testi-grid{grid-template-columns:1fr}
+  .tips-grid{grid-template-columns:1fr}
+  .why-features{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .search-box{grid-template-columns:1fr;border-radius:16px;padding:20px}
+  .hero-search{padding:0 16px}
+  .scroll-ind{display:none}
+  .hero-stats{gap:20px}
+  .stat-sep{display:none}
+  .stats-row{gap:6px}
+}
+@media(max-width:480px){
+  .dest-grid{grid-template-columns:1fr}
+  .dest-card:nth-child(1){grid-column:span 1}
+  .tours-grid{grid-template-columns:1fr}
+  .nl-form{flex-direction:column;gap:10px}
+  .nl-input,.nl-btn{border-radius:99px}
+  .modal-body,.modal-header{padding:20px}
+  .form-row{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  .btn-hero-primary,.btn-hero-ghost{width:100%;justify-content:center}
+  .vht-tagline{display:none}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .gallery-grid>div{grid-column:span 1!important;grid-row:span 1!important;aspect-ratio:1}
+  .float-btns{right:14px;bottom:80px}
+  .fb-btn{width:42px;height:42px;font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <img src="Logo-PNG.png" alt="V Holiday Tour" class="ld-logo-img"/>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+  <div class="ld-txt">Đang tải trải nghiệm...</div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="logo" href="#">
+        <img src="Logo-PNG.png" alt="V Holiday Tour" class="logo-img"/>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="#destinations">Điểm Đến</a>
+        <a class="nav-link" href="#tours">Tour Du Lịch</a>
+        <a class="nav-link" href="#gallery">Thư Viện Ảnh</a>
+        <a class="nav-link" href="#testimonials">Đánh Giá</a>
+        <a class="nav-link" href="#tips">Cẩm Nang</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-hotline"><i class="fas fa-phone-alt"></i> (+84) 0886.131.139</div>
+        <button class="btn-primary" onclick="openModal()">
+          <i class="fas fa-calendar-check"></i> Đặt Tour
+        </button>
+      </div>
+      <button class="hamburger" id="ham" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#destinations" onclick="closeMenu()"><i class="fas fa-map-marker-alt"></i> Điểm Đến</a>
+  <a href="#tours" onclick="closeMenu()"><i class="fas fa-route"></i> Tour Du Lịch</a>
+  <a href="#gallery" onclick="closeMenu()"><i class="fas fa-images"></i> Thư Viện Ảnh</a>
+  <a href="#testimonials" onclick="closeMenu()"><i class="fas fa-star"></i> Đánh Giá</a>
+  <a href="#tips" onclick="closeMenu()"><i class="fas fa-book-open"></i> Cẩm Nang</a>
+  <a class="mob-cta" href="#" onclick="closeMenu();openModal()">🗓️ Đặt Tour Ngay</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-scenery"></div>
+  <div class="hero-overlay"></div>
+  <div class="container" style="position:relative;z-index:2;padding-bottom:160px">
+    <div class="hero-content">
+      <div class="hero-badge">
+        ✈️ Khám Phá Đất Nước Hình Chữ S
+      </div>
+      <h1 class="hero-title">
+        Hành Trình<br/>
+        <span class="line2">Việt Nam</span><br/>
+        Diệu Kỳ
+      </h1>
+      <p class="hero-desc">
+        Từ Vịnh Hạ Long huyền ảo đến phố cổ Hội An lung linh đèn lồng — khám phá vẻ đẹp ngàn đời của dải đất hình chữ S với những hành trình được thiết kế riêng cho bạn.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary" onclick="openModal()">
+          <i class="fas fa-compass"></i> Khám Phá Ngay
+        </button>
+        <a class="btn-hero-ghost" href="#tours">
+          <i class="fas fa-play-circle"></i> Xem Các Tour
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-num" data-count="2500" data-suffix="+">0</div>
+          <div class="hstat-lbl">Tour thành công</div>
+        </div>
+        <div class="hstat-divider"></div>
+        <div class="hstat">
+          <div class="hstat-num" data-count="63" data-suffix="">0</div>
+          <div class="hstat-lbl">Tỉnh thành</div>
+        </div>
+        <div class="hstat-divider"></div>
+        <div class="hstat">
+          <div class="hstat-num" data-count="98" data-suffix="%">0</div>
+          <div class="hstat-lbl">Hài lòng</div>
+        </div>
+        <div class="hstat-divider"></div>
+        <div class="hstat">
+          <div class="hstat-num" data-count="15" data-suffix=" năm">0</div>
+          <div class="hstat-lbl">Kinh nghiệm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH BAR -->
+  <div class="hero-search">
+    <div class="search-box">
+      <div class="search-field">
+        <label>🗺️ Điểm Đến</label>
+        <select>
+          <option>Chọn điểm đến...</option>
+          <option>Vịnh Hạ Long</option>
+          <option>Hội An</option>
+          <option>Hà Nội</option>
+          <option>Đà Nẵng</option>
+          <option>Sa Pa</option>
+          <option>Phú Quốc</option>
+          <option>Nha Trang</option>
+          <option>Huế</option>
+          <option>Mũi Né</option>
+          <option>Cần Thơ</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>📅 Ngày Khởi Hành</label>
+        <input type="date"/>
+      </div>
+      <div class="search-field">
+        <label>👥 Số Người</label>
+        <select>
+          <option>1 người</option>
+          <option>2 người</option>
+          <option>3-5 người</option>
+          <option>6-10 người</option>
+          <option>Đoàn > 10 người</option>
+        </select>
+      </div>
+      <button class="btn-search" onclick="openModal()">
+        <i class="fas fa-search"></i> Tìm Tour
+      </button>
+    </div>
+  </div>
+  <!-- Scroll indicator -->
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>Cuộn xuống</span>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">🏆 #1</div>
+        <div class="stat-label">Công ty du lịch uy tín</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">8 UNESCO</div>
+        <div class="stat-label">Di sản thế giới</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">50,000+</div>
+        <div class="stat-label">Du khách mỗi năm</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Hỗ trợ tận tình</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">4.9 ⭐</div>
+        <div class="stat-label">Đánh giá trung bình</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="section destinations" id="destinations">
+  <div class="container">
+    <div class="text-center rv">
+      <div class="tag-label">🗺️ Điểm Đến Nổi Bật</div>
+      <h2 class="section-title">Khám Phá <span class="gold italic">Việt Nam</span> Từ Bắc Đến Nam</h2>
+      <p class="section-sub">Mỗi vùng đất là một câu chuyện — từ vẻ hùng vĩ của núi rừng phía Bắc đến sự quyến rũ của biển đảo miền Nam.</p>
+    </div>
+    <div class="dest-grid">
+      <!-- Featured -->
+      <div class="dest-card rv" style="transition-delay:.05s" onclick="openModal()">
+        <div class="dest-img" style="min-height:400px">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">⛵</div>
+            <p>Nghỉ dưỡng trên du thuyền, ngắm hoàng hôn giữa hàng nghìn đảo đá vôi huyền ảo</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Nổi Bật #1</div>
+          <div class="dest-name">Vịnh Hạ Long</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Quảng Ninh · Di sản UNESCO</div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="dest-card rv" style="transition-delay:.1s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1555217851-6141535bd771?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🏮</div>
+            <p>Phố cổ lung linh đèn lồng, di sản văn hóa thế giới hơn 400 năm tuổi</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">UNESCO</div>
+          <div class="dest-name">Phố Cổ Hội An</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Quảng Nam</div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="dest-card rv" style="transition-delay:.15s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🏯</div>
+            <p>Kinh thành cổ kính với hoàng thành, lăng tẩm và nền văn hóa Huế độc đáo</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Lịch Sử</div>
+          <div class="dest-name">Cố Đô Huế</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Thừa Thiên Huế</div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="dest-card rv" style="transition-delay:.2s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🌄</div>
+            <p>Ruộng bậc thang mùa lúa chín vàng, văn hóa bản địa độc đáo trên mây</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Trekking</div>
+          <div class="dest-name">Sa Pa</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Lào Cai</div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="dest-card rv" style="transition-delay:.25s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🏖️</div>
+            <p>Đảo ngọc thiên đường với bãi biển trong vắt và rừng nguyên sinh tuyệt đẹp</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Biển Đảo</div>
+          <div class="dest-name">Phú Quốc</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Kiên Giang</div>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="dest-card rv" style="transition-delay:.3s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🌃</div>
+            <p>Thủ đô ngàn năm văn hiến với hồ Hoàn Kiếm, Văn Miếu và phố cổ 36 phường</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Thủ Đô</div>
+          <div class="dest-name">Hà Nội</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Hà Nội</div>
+        </div>
+      </div>
+      <!-- 7 -->
+      <div class="dest-card rv" style="transition-delay:.35s" onclick="openModal()">
+        <div class="dest-img" style="aspect-ratio:1/1">
+          <div class="dest-gradient" style="background-image:url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800&q=80&fit=crop')"></div>
+          <div class="dest-hover-info">
+            <div class="dh-ico">🌉</div>
+            <p>Thành phố đáng sống với Cầu Vàng, Bà Nà Hills và bãi biển Mỹ Khê nổi tiếng</p>
+            <div class="dh-btn">Khám Phá →</div>
+          </div>
+        </div>
+        <div class="dest-info">
+          <div class="dest-badge">Thành Phố</div>
+          <div class="dest-name">Đà Nẵng</div>
+          <div class="dest-location"><i class="fas fa-map-marker-alt"></i> Đà Nẵng</div>
+        </div>
+      </div>
+    </div>
+    <div class="dest-more-btn rv" style="transition-delay:.4s">
+      <button class="btn-primary" onclick="openModal()" style="padding:13px 36px;font-size:15px;display:inline-flex;align-items:center;gap:8px">
+        <i class="fas fa-map"></i> Xem Tất Cả Điểm Đến
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- TOURS -->
+<section class="section tours-sec" id="tours">
+  <div class="container">
+    <div class="text-center rv">
+      <div class="tag-label">🗓️ Tour Du Lịch</div>
+      <h2 class="section-title">Hành Trình <span class="red italic">Được Yêu Thích</span></h2>
+      <p class="section-sub">Những gói tour được thiết kế tỉ mỉ — cân bằng giữa khám phá, nghỉ ngơi và trải nghiệm văn hóa địa phương.</p>
+    </div>
+    <div class="tours-filter rv">
+      <button class="filter-btn active" onclick="setFilter(this,'all')">Tất Cả</button>
+      <button class="filter-btn" onclick="setFilter(this,'mien-bac')">Miền Bắc</button>
+      <button class="filter-btn" onclick="setFilter(this,'mien-trung')">Miền Trung</button>
+      <button class="filter-btn" onclick="setFilter(this,'mien-nam')">Miền Nam</button>
+      <button class="filter-btn" onclick="setFilter(this,'toan-quoc')">Toàn Quốc</button>
+    </div>
+    <div class="tours-grid">
+      <!-- Tour 1 -->
+      <div class="tour-card rv" data-cat="mien-bac" style="transition-delay:.05s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-hot">HOT</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★★</span> 4.9 (312)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Miền Bắc</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 4 ngày 3 đêm</span>
+          </div>
+          <h3 class="tour-name">Hạ Long Bay — Đêm Trên Du Thuyền 5 Sao</h3>
+          <p class="tour-desc">Nghỉ dưỡng trên du thuyền hạng sang, chèo kayak khám phá hang động, ngắm hoàng hôn trên vịnh.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Khách sạn 5★</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Ăn uống</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Hướng dẫn viên</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">4.500.000đ</div>
+              <div class="tour-price"><sup>₫</sup>3.200.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+      <!-- Tour 2 -->
+      <div class="tour-card rv" data-cat="toan-quoc" style="transition-delay:.1s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1555217851-6141535bd771?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-sale">-20%</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★★</span> 4.8 (198)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Di Sản</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 10 ngày 9 đêm</span>
+          </div>
+          <h3 class="tour-name">Hành Trình Di Sản UNESCO — Hà Nội · Hội An · Huế</h3>
+          <p class="tour-desc">Xuyên Việt theo dấu chân di sản — trải nghiệm văn hóa từ Bắc vào Nam với hướng dẫn viên chuyên nghiệp.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Máy bay nội địa</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Khách sạn 4★</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Ăn uống</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">12.000.000đ</div>
+              <div class="tour-price"><sup>₫</sup>9.600.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+      <!-- Tour 3 -->
+      <div class="tour-card rv" data-cat="mien-nam" style="transition-delay:.15s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-new">MỚI</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★★</span> 5.0 (87)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Miền Nam</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 5 ngày 4 đêm</span>
+          </div>
+          <h3 class="tour-name">Phú Quốc Thiên Đường — Resort & Biển Xanh</h3>
+          <p class="tour-desc">Nghỉ dưỡng tại resort 5 sao, snorkeling tại vùng biển trong vắt, thưởng thức hải sản tươi sống.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Resort 5★</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Vé máy bay</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Snorkeling</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">8.000.000đ</div>
+              <div class="tour-price"><sup>₫</sup>6.500.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+      <!-- Tour 4 -->
+      <div class="tour-card rv" data-cat="mien-bac" style="transition-delay:.2s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-hot">HOT</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★</span> 4.7 (234)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Trekking</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 3 ngày 2 đêm</span>
+          </div>
+          <h3 class="tour-name">Sa Pa Trekking — Ruộng Bậc Thang & Bản Làng</h3>
+          <p class="tour-desc">Trekking qua ruộng bậc thang Mù Cang Chải, thăm bản làng người Hmông, H'Mông Hoa.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Tàu hoả VIP</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Homestay</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Hướng dẫn viên</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">2.800.000đ</div>
+              <div class="tour-price"><sup>₫</sup>2.100.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+      <!-- Tour 5 -->
+      <div class="tour-card rv" data-cat="mien-trung" style="transition-delay:.25s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-sale">-15%</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★★</span> 4.9 (156)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Miền Trung</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 5 ngày 4 đêm</span>
+          </div>
+          <h3 class="tour-name">Đà Nẵng · Hội An · Bà Nà Hills</h3>
+          <p class="tour-desc">Từ Cầu Vàng kỳ diệu đến phố cổ Hội An, tắm biển Mỹ Khê và khám phá vương quốc Bà Nà Hills.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Vé máy bay</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Khách sạn 4★</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Vé Bà Nà</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">6.000.000đ</div>
+              <div class="tour-price"><sup>₫</sup>5.100.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+      <!-- Tour 6 -->
+      <div class="tour-card rv" data-cat="mien-nam" style="transition-delay:.3s">
+        <div class="tour-thumb">
+          <div class="tour-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1553532434-5ab5b6b84993?w=700&q=80&fit=crop')"></div>
+          <div class="tour-badge badge-new">MỚI</div>
+          <div class="tour-fav" onclick="toggleFav(this)">🤍</div>
+          <div class="tour-rating"><span class="stars">★★★★</span> 4.8 (103)</div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-meta">
+            <span class="tour-tag">Miền Nam</span>
+            <span class="tour-duration"><i class="fas fa-clock"></i> 4 ngày 3 đêm</span>
+          </div>
+          <h3 class="tour-name">Đồng Bằng Sông Cửu Long — Miền Tây Sông Nước</h3>
+          <p class="tour-desc">Lênh đênh sông nước, chợ nổi Cái Răng, vườn trái cây và làng nghề truyền thống độc đáo.</p>
+          <div class="tour-includes">
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Xe đưa đón</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Tàu thuyền</span>
+            <span class="tour-inc"><i class="fas fa-check-circle"></i> Ăn uống</span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-old">3.500.000đ</div>
+              <div class="tour-price"><sup>₫</sup>2.800.000 <span class="tour-price-unit">/người</span></div>
+            </div>
+            <button class="btn-book" onclick="openModal()"><i class="fas fa-calendar-plus"></i> Đặt Ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center rv" style="margin-top:40px;transition-delay:.35s">
+      <button class="btn-primary" onclick="openModal()" style="padding:13px 36px;font-size:15px;display:inline-flex;align-items:center;gap:8px">
+        <i class="fas fa-list"></i> Xem Tất Cả Tour
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section why-sec">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-visual rvl">
+        <div class="why-img-main">
+          <div style="width:100%;height:100%;background:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80&fit=crop') center/cover no-repeat"></div>
+        </div>
+        <div class="why-img-float">
+          <div style="width:100%;height:100%;background:url('https://images.unsplash.com/photo-1555217851-6141535bd771?w=400&q=80&fit=crop') center/cover no-repeat"></div>
+        </div>
+        <div class="why-badge-float">
+          <div class="wbf-ico">🏆</div>
+          <div>
+            <div class="wbf-num">15+</div>
+            <div class="wbf-lbl">Năm kinh nghiệm</div>
+          </div>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="tag-label">✨ Tại Sao Chọn Chúng Tôi</div>
+        <h2 class="section-title">Trải Nghiệm Du Lịch<br/><span class="gold italic">Đẳng Cấp 5 Sao</span></h2>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px">Với hơn 15 năm đồng hành cùng du khách, chúng tôi hiểu rằng mỗi chuyến đi là một ký ức — và chúng tôi cam kết làm cho ký ức ấy trở nên hoàn hảo nhất.</p>
+        <div class="why-features">
+          <div class="why-feat">
+            <div class="wf-ico red"><i class="fas fa-shield-alt" style="color:var(--red)"></i></div>
+            <div>
+              <div class="wf-title">Cam Kết An Toàn</div>
+              <div class="wf-desc">Đảm bảo an toàn tuyệt đối cho mọi hành trình với đội ngũ hướng dẫn viên được đào tạo chuyên nghiệp.</div>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="wf-ico gold"><i class="fas fa-star" style="color:var(--gold)"></i></div>
+            <div>
+              <div class="wf-title">Chất Lượng Cao Cấp</div>
+              <div class="wf-desc">Khách sạn 4-5 sao, phương tiện hiện đại, dịch vụ ẩm thực phong phú và đặc sắc.</div>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="wf-ico green"><i class="fas fa-leaf" style="color:var(--green)"></i></div>
+            <div>
+              <div class="wf-title">Du Lịch Bền Vững</div>
+              <div class="wf-desc">Chúng tôi cam kết bảo vệ môi trường và hỗ trợ cộng đồng địa phương trong mỗi tour.</div>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="wf-ico blue"><i class="fas fa-headset" style="color:#2563eb"></i></div>
+            <div>
+              <div class="wf-title">Hỗ Trợ 24/7</div>
+              <div class="wf-desc">Đội ngũ tư vấn luôn sẵn sàng hỗ trợ bạn mọi lúc — trước, trong và sau chuyến đi.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px">
+          <button class="btn-primary" onclick="openModal()" style="padding:13px 32px;font-size:15px;display:inline-flex;align-items:center;gap:8px">
+            <i class="fas fa-phone-alt"></i> Liên Hệ Tư Vấn Miễn Phí
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section-sm gallery-sec" id="gallery">
+  <div class="container">
+    <div class="text-center rv" style="margin-bottom:40px">
+      <div class="tag-label">📸 Thư Viện Ảnh</div>
+      <h2 class="section-title">Vẻ Đẹp <span class="red italic">Bốn Phương</span></h2>
+      <p class="section-sub">Những khoảnh khắc tuyệt vời ghi lại từ khắp nẻo đường Việt Nam.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gal-item g1 rv" style="transition-delay:.05s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g2 rv" style="transition-delay:.1s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1555217851-6141535bd771?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g3 rv" style="transition-delay:.15s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g4 rv" style="transition-delay:.2s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g5 rv" style="transition-delay:.25s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g6 rv" style="transition-delay:.3s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=900&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g7 rv" style="transition-delay:.35s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=900&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="gal-item g8 rv" style="transition-delay:.4s">
+        <div class="gi-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1553532434-5ab5b6b84993?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+        <div class="gi-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-sec" id="testimonials">
+  <div class="container">
+    <div class="text-center rv">
+      <div class="tag-label" style="background:rgba(230,168,23,.15);border-color:rgba(230,168,23,.3);color:var(--gold)">💬 Cảm Nhận Du Khách</div>
+      <h2 class="section-title" style="color:#fff">Họ Đã Nói Gì Về<br/><span style="color:var(--gold);font-style:italic">Chuyến Đi?</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.5)">Hơn 50.000 du khách đã tin tưởng và cùng chúng tôi tạo nên những kỷ niệm đáng nhớ.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv" style="transition-delay:.05s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Chuyến đi Hạ Long trên du thuyền thực sự là trải nghiệm không thể quên. Cảnh vật hùng vĩ, dịch vụ tuyệt vời, hướng dẫn viên nhiệt tình và am hiểu. Nhất định sẽ quay lại!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#c8102e,#8b0d1e)">N</div>
+          <div>
+            <div class="testi-name">Nguyễn Thị Hoa</div>
+            <div class="testi-role">Giáo viên · Hà Nội</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Hạ Long 4N3Đ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" style="transition-delay:.1s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Gia đình tôi 5 người đi tour Phú Quốc — resort đẹp, biển xanh, thức ăn ngon. Các con rất thích. Dịch vụ chu đáo từ khâu đặt tour đến khi về nhà. Cảm ơn team rất nhiều!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#2d6a4f,#1b4332)">T</div>
+          <div>
+            <div class="testi-name">Trần Văn Minh</div>
+            <div class="testi-role">Kỹ sư · TP.HCM</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Phú Quốc 5N4Đ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" style="transition-delay:.15s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Tour xuyên Việt 10 ngày quá xuất sắc! Từ Hà Nội vào Hội An rồi vào Huế — mỗi điểm đến một vẻ đẹp riêng. Lịch trình hợp lý, không quá dày, có thời gian tự khám phá."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#1b4f72,#2980b9)">L</div>
+          <div>
+            <div class="testi-name">Lê Thanh Tú</div>
+            <div class="testi-role">Doanh nhân · Đà Nẵng</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Di Sản 10N9Đ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" style="transition-delay:.2s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Sa Pa mùa lúa chín đẹp như trong tranh! Đi trekking với hướng dẫn viên người bản địa, thăm bản làng, ăn tối với gia đình người Hmông — trải nghiệm thực sự chân thực và ý nghĩa."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#8b6914,#c9a227)">P</div>
+          <div>
+            <div class="testi-name">Phạm Thị Lan</div>
+            <div class="testi-role">Nhiếp ảnh gia · Hải Phòng</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Sa Pa 3N2Đ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" style="transition-delay:.25s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Hội An về đêm với hàng nghìn đèn lồng thật ma mị và lãng mạn. Tour Đà Nẵng - Hội An 5 ngày vừa đủ để khám phá cả hai thành phố. Rất satisfied với dịch vụ!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#5b3427,#a0522d)">H</div>
+          <div>
+            <div class="testi-name">Hoàng Đức Anh</div>
+            <div class="testi-role">Bác sĩ · Hà Nội</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Đà Nẵng - Hội An</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" style="transition-delay:.3s">
+        <div class="testi-stars">★★★★</div>
+        <p class="testi-text">"Miền Tây sông nước thật thú vị! Chợ nổi Cái Răng sáng sớm, vườn trái cây, đờn ca tài tử Nam Bộ — văn hóa miền Nam độc đáo quá. Tour tuy ngắn nhưng rất trọn vẹn."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:linear-gradient(135deg,#1a3a6c,#2857a7)">M</div>
+          <div>
+            <div class="testi-name">Mai Thị Xuân</div>
+            <div class="testi-role">Giám đốc · Cần Thơ</div>
+            <div class="testi-trip"><i class="fas fa-route"></i> Tour Miền Tây 4N3Đ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL TIPS -->
+<section class="section tips-sec" id="tips">
+  <div class="container">
+    <div class="text-center rv">
+      <div class="tag-label">📖 Cẩm Nang Du Lịch</div>
+      <h2 class="section-title">Bí Kíp Khám Phá<br/><span class="red italic">Việt Nam</span></h2>
+      <p class="section-sub">Những mẹo du lịch hữu ích từ đội ngũ chuyên gia — giúp chuyến đi của bạn trọn vẹn hơn.</p>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card rv" style="transition-delay:.05s">
+        <div class="tip-thumb">
+          <div class="tip-thumb-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+          <div class="tip-cat">Thời Tiết</div>
+        </div>
+        <div class="tip-body">
+          <div class="tip-meta">
+            <span><i class="fas fa-calendar"></i> Cập nhật 2026</span>
+            <span><i class="fas fa-clock"></i> 5 phút đọc</span>
+          </div>
+          <h3 class="tip-title">Thời Điểm Vàng Du Lịch Việt Nam — Tháng Nào Đẹp Nhất?</h3>
+          <p class="tip-excerpt">Mỗi miền có mùa đẹp riêng — tháng 3-4 cho Miền Bắc, tháng 1-8 cho Miền Trung, quanh năm cho Miền Nam và Phú Quốc...</p>
+          <a class="tip-link" href="#">Đọc Thêm <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="tip-card rv" style="transition-delay:.1s">
+        <div class="tip-thumb">
+          <div class="tip-thumb-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1555217851-6141535bd771?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+          <div class="tip-cat">Ẩm Thực</div>
+        </div>
+        <div class="tip-body">
+          <div class="tip-meta">
+            <span><i class="fas fa-calendar"></i> Cập nhật 2026</span>
+            <span><i class="fas fa-clock"></i> 7 phút đọc</span>
+          </div>
+          <h3 class="tip-title">Top 20 Món Ăn Nhất Định Phải Thử Khi Du Lịch Việt Nam</h3>
+          <p class="tip-excerpt">Từ phở Hà Nội, bún bò Huế, cao lầu Hội An đến bánh mì Sài Gòn — ẩm thực Việt Nam là hành trình vị giác không thể bỏ qua...</p>
+          <a class="tip-link" href="#">Đọc Thêm <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="tip-card rv" style="transition-delay:.15s">
+        <div class="tip-thumb">
+          <div class="tip-thumb-bg" style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80&fit=crop') center/cover no-repeat"></div>
+          <div class="tip-cat">Chuẩn Bị</div>
+        </div>
+        <div class="tip-body">
+          <div class="tip-meta">
+            <span><i class="fas fa-calendar"></i> Cập nhật 2026</span>
+            <span><i class="fas fa-clock"></i> 6 phút đọc</span>
+          </div>
+          <h3 class="tip-title">Checklist Hành Lý Hoàn Hảo Cho Mọi Chuyến Đi Trong Nước</h3>
+          <p class="tip-excerpt">Đừng để quên những vật dụng quan trọng — từ giấy tờ tùy thân, thuốc men, quần áo phù hợp thời tiết đến đồ điện tử cần thiết...</p>
+          <a class="tip-link" href="#">Đọc Thêm <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-sec">
+  <div class="container">
+    <div class="nl-inner rv">
+      <div class="nl-icon">✉️</div>
+      <h2 class="nl-title">Nhận Ưu Đãi Du Lịch Độc Quyền</h2>
+      <p class="nl-sub">Đăng ký nhận bản tin để không bỏ lỡ các chương trình khuyến mãi, tour giá tốt và cẩm nang du lịch mới nhất.</p>
+      <form class="nl-form" onsubmit="handleNewsletter(event)">
+        <input class="nl-input" type="email" placeholder="Nhập email của bạn..." required/>
+        <button type="submit" class="nl-btn">Đăng Ký Ngay →</button>
+      </form>
+      <p class="nl-note">🔒 Chúng tôi cam kết không spam. Hủy đăng ký bất kỳ lúc nào.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#" style="margin-bottom:0">
+          <img src="Logo-PNG.png" alt="V Holiday Tour" class="logo-img footer-logo-img"/>
+        </a>
+        <p>Đồng hành cùng bạn trên mọi hành trình khám phá đất nước Việt Nam tươi đẹp — từ đỉnh Fansipan đến mũi Cà Mau, từ bờ Đông sang bờ Tây.</p>
+        <div class="footer-social">
+          <a class="soc-btn" href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="soc-btn" href="#"><i class="fab fa-instagram"></i></a>
+          <a class="soc-btn" href="#"><i class="fab fa-youtube"></i></a>
+          <a class="soc-btn" href="#"><i class="fab fa-tiktok"></i></a>
+          <a class="soc-btn" href="#"><i class="fab fa-zalo" style="font-family:sans-serif;font-size:12px;font-weight:900">Z</i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Điểm Đến</div>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Vịnh Hạ Long</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Hội An</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Sa Pa</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Phú Quốc</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Đà Nẵng</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Nha Trang</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Dịch Vụ</div>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Tour trong nước</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Tour nước ngoài</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Tour team building</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Đặt khách sạn</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Thuê xe du lịch</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Visa & hộ chiếu</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Liên Hệ</div>
+        <div class="footer-contact">
+          <div class="fc-item">
+            <div class="fc-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="fc-text"><strong>Địa chỉ</strong>123 Phố Cổ Hà Nội, Hoàn Kiếm, Hà Nội</div>
+          </div>
+          <div class="fc-item">
+            <div class="fc-icon"><i class="fas fa-phone"></i></div>
+            <div class="fc-text"><strong>Điện thoại</strong>(+84) 0886.131.139</div>
+          </div>
+          <div class="fc-item">
+            <div class="fc-icon"><i class="fas fa-envelope"></i></div>
+            <div class="fc-text"><strong>Email</strong>hello@vietnamtuoidep.vn</div>
+          </div>
+          <div class="fc-item">
+            <div class="fc-icon"><i class="fas fa-clock"></i></div>
+            <div class="fc-text"><strong>Giờ làm việc</strong>Thứ 2 – Chủ nhật: 7:00 – 21:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 V Holiday Tour. Giấy phép kinh doanh lữ hành số 01-123/TCDL-GP LHQT.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Điều khoản sử dụng</a>
+        <a href="#">Chính sách bảo mật</a>
+        <a href="#">Chính sách hoàn tiền</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>🗓️ Đặt Tour Du Lịch</h3>
+      <p>Điền thông tin để nhận tư vấn tour miễn phí</p>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Họ & Tên *</label>
+        <input class="form-input" type="text" placeholder="Nguyễn Văn A"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Điện Thoại *</label>
+          <input class="form-input" type="tel" placeholder="0901 234 567"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input class="form-input" type="email" placeholder="email@gmail.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Điểm Đến Mong Muốn</label>
+        <select class="form-input">
+          <option>Chọn điểm đến...</option>
+          <option>Vịnh Hạ Long</option>
+          <option>Hội An</option>
+          <option>Sa Pa</option>
+          <option>Phú Quốc</option>
+          <option>Đà Nẵng</option>
+          <option>Huế</option>
+          <option>Nha Trang</option>
+          <option>Tour xuyên Việt</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ngày Khởi Hành</label>
+          <input class="form-input" type="date"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Số Người</label>
+          <select class="form-input">
+            <option>1 người</option>
+            <option>2 người</option>
+            <option>3-5 người</option>
+            <option>6-10 người</option>
+            <option>Đoàn > 10</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Yêu Cầu Đặc Biệt</label>
+        <textarea class="form-input" rows="3" placeholder="Ví dụ: cần phòng đôi, ăn chay, đi kèm trẻ em..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleBooking()">
+        <i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Đặt Tour
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">
+        🔒 Thông tin của bạn được bảo mật tuyệt đối. Chúng tôi sẽ liên hệ trong vòng 30 phút.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING CONTACT -->
+<div class="float-btns">
+  <a href="tel:+84886131139" class="fb-btn fb-phone" data-tip="Gọi: 0886.131.139" title="Gọi ngay">
+    <i class="fas fa-phone"></i>
+  </a>
+  <a href="https://zalo.me/84886131139" class="fb-btn fb-zalo" data-tip="Chat Zalo" title="Zalo" target="_blank" rel="noopener">Z</a>
+  <a href="https://wa.me/84886131139" class="fb-btn fb-wa" data-tip="WhatsApp" title="WhatsApp" target="_blank" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Về đầu trang">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// ── LOADER
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide')},1600)
+})
+
+// ── NAVBAR scroll + progress bar
+const navbar=document.getElementById('navbar')
+const progressBar=document.getElementById('progress-bar')
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>60)
+  document.getElementById('back-top').classList.toggle('on',window.scrollY>400)
+  const doc=document.documentElement
+  const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100
+  progressBar.style.width=pct+'%'
+},{ passive:true })
+
+// ── MOBILE MENU
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('on')
+  document.getElementById('mobMenu').classList.toggle('on')
+}
+function closeMenu(){
+  document.getElementById('ham').classList.remove('on')
+  document.getElementById('mobMenu').classList.remove('on')
+}
+
+// ── MODAL
+function openModal(){
+  document.getElementById('bookingModal').classList.add('on')
+  document.body.style.overflow='hidden'
+}
+function closeModal(e){
+  if(e.target===document.getElementById('bookingModal')) closeModalDirect()
+}
+function closeModalDirect(){
+  document.getElementById('bookingModal').classList.remove('on')
+  document.body.style.overflow=''
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModalDirect()})
+
+// ── BOOKING FORM
+function handleBooking(){
+  const inputs=document.querySelectorAll('#bookingModal .form-input')
+  let valid=true
+  inputs.forEach(i=>{if(i.hasAttribute('required')&&!i.value.trim()){i.style.borderColor='var(--red)';valid=false}else{i.style.borderColor=''}})
+  if(!valid) return
+  const btn=document.querySelector('.form-submit')
+  btn.innerHTML='✅ Đã gửi thành công!'
+  btn.style.background='linear-gradient(135deg,#10b981,#059669)'
+  setTimeout(()=>{
+    closeModalDirect()
+    btn.innerHTML='<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Đặt Tour'
+    btn.style.background=''
+  },2200)
+}
+
+// ── NEWSLETTER
+function handleNewsletter(e){
+  e.preventDefault()
+  const btn=e.target.querySelector('.nl-btn')
+  btn.textContent='✅ Đã đăng ký!'
+  btn.style.background='#10b981'
+  setTimeout(()=>{btn.textContent='Đăng Ký Ngay →';btn.style.background='';e.target.reset()},2500)
+}
+
+// ── FILTER
+function setFilter(el,cat){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'))
+  el.classList.add('active')
+  document.querySelectorAll('.tour-card').forEach(c=>{
+    const match=cat==='all'||c.dataset.cat===cat
+    c.style.display=match?'':'none'
+  })
+}
+
+// ── FAVORITE
+function toggleFav(el){
+  el.textContent=el.textContent==='🤍'?'❤️':'🤍'
+}
+
+// ── REVEAL on scroll
+const revEls=document.querySelectorAll('.rv,.rvl,.rvr,.rvs')
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on')}})
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'})
+revEls.forEach(el=>revObs.observe(el))
+
+// ── COUNT UP animation
+function countUp(el){
+  const target=parseInt(el.dataset.count)
+  const suffix=el.dataset.suffix||''
+  const dur=1600
+  const step=dur/target
+  let cur=0
+  const timer=setInterval(()=>{
+    cur=Math.min(cur+Math.ceil(target/80),target)
+    el.textContent=cur.toLocaleString('vi-VN')+suffix
+    if(cur>=target) clearInterval(timer)
+  },step)
+}
+const countEls=document.querySelectorAll('[data-count]')
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){countUp(e.target);countObs.unobserve(e.target)}})
+},{threshold:.5})
+countEls.forEach(el=>countObs.observe(el))
+
+// ── ACTIVE NAV LINK on scroll
+const sections=document.querySelectorAll('section[id],div[id]')
+const navLinks=document.querySelectorAll('.nav-link')
+const obs2=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>{
+        l.classList.toggle('active-link',l.getAttribute('href')==='#'+e.target.id)
+      })
+    }
+  })
+},{threshold:.4})
+sections.forEach(s=>obs2.observe(s))
+
+// ── SMOOTH anchor clicks
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'))
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
+  })
+})
+
+// ── GALLERY lightbox
+const galItems=document.querySelectorAll('.gal-item')
+galItems.forEach((item,idx)=>{
+  item.addEventListener('click',()=>{
+    const bgEl=item.querySelector('.gi-bg')
+    const bgStyle=bgEl?bgEl.style.background:''
+    const urlMatch=bgStyle.match(/url\(['"]?([^'")\s]+)['"]?\)/)
+    const imgUrl=urlMatch?urlMatch[1]:''
+    const lb=document.createElement('div')
+    lb.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;flex-direction:column;gap:16px'
+    lb.innerHTML=imgUrl
+      ?`<img src="${imgUrl.replace(/w=\d+/,'w=1400')}" style="max-width:100%;max-height:82vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)"/><p style="color:rgba(255,255,255,.4);font-size:13px;font-family:'Be Vietnam Pro',sans-serif;letter-spacing:1px">${idx+1} / ${galItems.length} &nbsp;·&nbsp; Nhấn bất kỳ để đóng</p>`
+      :`<p style="color:#fff;font-size:60px">🌏</p>`
+    lb.addEventListener('click',()=>lb.remove())
+    const esc=e=>{if(e.key==='Escape'){lb.remove();document.removeEventListener('keydown',esc)}}
+    document.addEventListener('keydown',esc)
+    document.body.appendChild(lb)
+  })
+})
+</script>
+</body>
+</html>
