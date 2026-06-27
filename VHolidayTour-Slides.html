@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>V Holiday Tour — Tây Ninh Tâm Linh</title>
+<link rel="icon" href="./Logo-PNG.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#1a0f05;
+  --brown:#231608;
+  --card:#2c1a06;
+  --gold:#c9853a;
+  --bright:#e8a840;
+  --light:#fdf9f3;
+  --white:#fff;
+  --muted:rgba(0,0,0,0.38);
+  --T:0.6s cubic-bezier(0.77,0,0.18,1);
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;background:#f0ece6}
+
+/* ═══ SLIDER CORE ═══ */
+.slider{width:100vw;height:100vh;overflow:hidden;position:relative}
+.track{display:flex;height:100%;transition:transform var(--T);will-change:transform}
+.slide{
+  width:100vw;height:100vh;flex-shrink:0;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;
+  background:var(--white);
+}
+
+/* ═══ TOP ACCENT BAR ═══ */
+.top-bar{height:5px;background:linear-gradient(to right,var(--gold),var(--bright),var(--gold));flex-shrink:0}
+
+/* ═══ SLIDE HEADER (logo + counter) ═══ */
+.sh{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 36px;flex-shrink:0;
+  border-bottom:1px solid rgba(201,133,58,0.14);
+}
+.sh-logo img{height:38px;display:block}
+.sh-count{font-size:0.7rem;letter-spacing:0.15em;color:rgba(0,0,0,0.28);font-weight:500}
+
+/* ═══ SLIDE BODY ═══ */
+.sb{flex:1;overflow:hidden;padding:20px 48px 12px;display:flex;flex-direction:column;gap:10px}
+
+/* ═══ TEXT HELPERS ═══ */
+.s-tag{font-size:0.62rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.s-title{font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;color:var(--gold);line-height:1.2;font-family:'Playfair Display',Georgia,serif}
+.s-sub{font-size:0.8rem;color:var(--muted);line-height:1.6}
+
+/* ═══ FOOTER BAR ═══ */
+.sf{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:7px 36px;border-top:1px solid rgba(201,133,58,0.15);
+  font-size:0.62rem;color:rgba(0,0,0,0.28);letter-spacing:0.06em;flex-shrink:0;
+}
+.sf b{color:var(--gold);font-weight:600}
+
+/* ═══ NAVIGATION ═══ */
+.nav-btn{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:300;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(201,133,58,0.15);border:1.5px solid rgba(201,133,58,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;color:var(--gold);
+  transition:all 0.2s;backdrop-filter:blur(6px);
+}
+.nav-btn:hover{background:var(--gold);color:#fff;transform:translateY(-50%) scale(1.08)}
+.nav-btn.hidden{opacity:0;pointer-events:none}
+#prevBtn{left:12px}
+#nextBtn{right:12px}
+.dots{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:300}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(201,133,58,0.28);cursor:pointer;border:none;padding:0;transition:all 0.3s}
+.dot.active{background:var(--gold);transform:scale(1.3)}
+
+/* ══════════════════════════════════════
+   SLIDE 1 — HERO (split-screen)
+══════════════════════════════════════ */
+.slide-hero{padding:0;background:var(--deep)}
+.hero-inner{display:flex;height:100%}
+.hero-left{
+  width:44%;background:var(--deep);flex-shrink:0;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:90px 48px 52px;position:relative;
+}
+.hero-logo{position:absolute;top:20px;left:36px}
+.hero-logo img{height:44px;background:#fff;border-radius:7px;padding:4px 10px;display:block}
+.hero-label{font-size:0.62rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hero-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.4rem,2.3vw,2rem);font-weight:400;
+  color:#fff;line-height:1.1;margin-bottom:5px;display:block;
+}
+.hero-main{
+  font-size:clamp(1.8rem,3.5vw,3.2rem);font-weight:900;
+  color:var(--bright);text-transform:uppercase;
+  letter-spacing:0.02em;display:block;line-height:1.05;margin-bottom:18px;
+}
+.hero-tagline{font-size:0.86rem;font-style:italic;color:rgba(255,255,255,0.52);margin-bottom:26px;line-height:1.6}
+.hero-places{list-style:none;margin-bottom:22px}
+.hero-places li{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.hero-places li:first-child{color:#fff;font-size:0.76rem;border-color:rgba(201,133,58,0.22);padding-bottom:8px;margin-bottom:3px}
+.hero-places li:not(:first-child)::before{content:'— ';color:var(--gold)}
+.hero-hotline{font-size:0.72rem;color:var(--gold);margin-bottom:26px;letter-spacing:0.05em}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:#fff;padding:12px 30px;
+  border-radius:100px;font-size:0.84rem;font-weight:700;
+  border:none;cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.2s,transform 0.2s;
+}
+.hero-btn:hover{background:var(--bright);transform:translateY(-2px)}
+.hero-right{flex:1;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+
+/* ══════════════════════════════════════
+   SLIDE 2 — STATS
+══════════════════════════════════════ */
+.stat-row{display:flex;gap:16px;margin-top:4px}
+.stat-box{
+  flex:1;background:var(--card);border-radius:16px;
+  padding:28px 20px 24px;text-align:center;
+}
+.stat-num{
+  font-size:clamp(2rem,3.8vw,2.8rem);font-weight:900;
+  color:var(--bright);line-height:1;margin-bottom:12px;
+  font-family:'Playfair Display',serif;
+}
+.stat-lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.48)}
+.trust-row{display:flex;gap:0;border-top:1px solid rgba(201,133,58,0.14);padding-top:14px;margin-top:auto}
+.trust-item{
+  flex:1;display:flex;align-items:center;gap:8px;
+  font-size:0.7rem;color:rgba(0,0,0,0.42);padding:0 14px;
+  border-right:1px solid rgba(201,133,58,0.12);
+}
+.trust-item:last-child{border-right:none}
+.ti-icon{color:var(--gold);font-size:0.9rem;flex-shrink:0}
+
+/* ══════════════════════════════════════
+   SLIDE 3 — DESTINATIONS
+══════════════════════════════════════ */
+.dest-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:9px;flex:1;overflow:hidden;
+}
+.dc{position:relative;overflow:hidden;border-radius:10px;background:var(--card)}
+.dc:first-child{grid-row:span 2}
+.dc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
+.dc:hover img{transform:scale(1.05)}
+.dc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,8,2,0.9) 0%,rgba(18,8,2,0.1) 55%)}
+.dc-info{position:absolute;bottom:0;left:0;right:0;padding:13px 15px}
+.dc-region{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:3px}
+.dc-name{font-size:1rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif;line-height:1.2}
+
+/* ══════════════════════════════════════
+   SLIDE 4 — TIMELINE
+══════════════════════════════════════ */
+.timeline{display:flex;position:relative;flex:1;align-items:flex-start;padding-top:12px;gap:0}
+.timeline::before{
+  content:'';position:absolute;top:38px;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold),var(--bright),var(--gold));
+  opacity:0.32;
+}
+.tl-step{flex:1;padding:0 7px;text-align:center;position:relative}
+.tl-dot{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--card);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;margin:0 auto 9px;position:relative;z-index:1;
+}
+.tl-time{font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:600}
+.tl-desc{font-size:0.58rem;color:rgba(0,0,0,0.45);line-height:1.55}
+
+/* ══════════════════════════════════════
+   SLIDE 5 — SERVICES
+══════════════════════════════════════ */
+.svc-row{display:flex;gap:14px;flex:1}
+.svc-card{
+  flex:1;background:var(--card);border-radius:16px;
+  border:1.5px solid rgba(201,133,58,0.3);
+  padding:28px 22px;position:relative;overflow:hidden;
+}
+.svc-num{
+  position:absolute;top:14px;right:16px;
+  font-size:2.8rem;font-weight:300;
+  color:rgba(201,133,58,0.09);font-family:'Playfair Display',serif;line-height:1;
+}
+.svc-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:12px;font-family:'Playfair Display',serif}
+.svc-desc{font-size:0.74rem;color:rgba(255,255,255,0.46);line-height:1.68}
+
+/* ══════════════════════════════════════
+   SLIDE 6 — GALLERY
+══════════════════════════════════════ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1.6fr 1.2fr 1fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:7px;flex:1;overflow:hidden;
+}
+.gi{position:relative;overflow:hidden;border-radius:9px;background:var(--card)}
+.gi:nth-child(1){grid-row:1/3;grid-column:1}
+.gi:nth-child(2){grid-row:1/3;grid-column:2}
+.gi:nth-child(3){grid-row:1;grid-column:3}
+.gi:nth-child(4){grid-row:1;grid-column:4}
+.gi:nth-child(5){grid-row:1;grid-column:5}
+.gi:nth-child(6){grid-row:2;grid-column:3/6}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
+.gi:hover img{transform:scale(1.06)}
+.gi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,8,2,0.85) 0%,rgba(18,8,2,0.1) 55%)}
+.gi-lbl{position:absolute;bottom:10px;left:12px;right:12px}
+.gi-lbl span{font-size:0.54rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:2px}
+.gi-lbl strong{font-size:0.78rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
+
+/* ══════════════════════════════════════
+   SLIDE 7 — MANIFESTO
+══════════════════════════════════════ */
+.manifesto{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;gap:0}
+.mf-title{
+  font-size:clamp(1.1rem,2.2vw,1.75rem);font-weight:700;
+  color:var(--brown);max-width:660px;margin-bottom:12px;line-height:1.3;
+}
+.mf-line{width:56px;height:2px;background:var(--gold);border-radius:1px;margin:0 auto 16px}
+.mf-quote{
+  font-size:clamp(0.78rem,1.3vw,0.95rem);font-style:italic;
+  color:rgba(0,0,0,0.48);max-width:680px;line-height:1.9;margin-bottom:6px;
+}
+.mf-author{font-size:0.66rem;letter-spacing:0.16em;color:var(--gold);margin-bottom:24px}
+.mf-cards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mf-card{
+  background:rgba(201,133,58,0.07);border:1.5px solid rgba(201,133,58,0.2);
+  border-radius:12px;padding:14px 16px;font-size:0.7rem;
+  color:rgba(0,0,0,0.48);text-align:center;max-width:190px;line-height:1.6;
+}
+.mf-icon{font-size:1.1rem;margin-bottom:6px}
+
+/* ══════════════════════════════════════
+   SLIDE 8 — TESTIMONIALS
+══════════════════════════════════════ */
+.test-cols{display:flex;gap:10px;flex:1;align-items:flex-start}
+.test-col{display:flex;flex-direction:column;gap:10px;flex:1}
+.test-col.mid{padding-top:20px}
+.tc{background:var(--card);border-radius:14px;padding:16px}
+.tc-stars{color:var(--bright);font-size:0.85rem;margin-bottom:7px}
+.tc-quote{font-size:0.7rem;color:rgba(255,255,255,0.52);line-height:1.68;margin-bottom:12px;font-style:italic}
+.tc-hr{height:1px;background:rgba(255,255,255,0.08);margin-bottom:10px}
+.tc-name{font-size:0.74rem;font-weight:700;color:#fff;margin-bottom:2px}
+.tc-loc{font-size:0.62rem;color:rgba(255,255,255,0.3);letter-spacing:0.06em}
+
+/* ══════════════════════════════════════
+   SLIDE 9 — BOOKING
+══════════════════════════════════════ */
+.slide-booking{position:relative}
+.bk-bg{position:absolute;inset:0;z-index:0}
+.bk-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.bk-bg::after{content:'';position:absolute;inset:0;background:rgba(8,3,0,0.72)}
+.slide-booking .top-bar{position:relative;z-index:2}
+.slide-booking .sh{position:relative;z-index:2;border-color:rgba(255,255,255,0.08);background:rgba(0,0,0,0.15)}
+.slide-booking .sh-count{color:rgba(255,255,255,0.28)}
+.slide-booking .sb{position:relative;z-index:2}
+.slide-booking .sf{position:relative;z-index:2;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,0.28)}
+.bk-inner{display:flex;gap:16px;flex:1;align-items:stretch}
+.bk-tours{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;flex:1}
+.tour-card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(201,133,58,0.22);
+  border-radius:10px;padding:13px;backdrop-filter:blur(4px);
+}
+.tour-badge{font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:5px;font-weight:600}
+.tour-name{font-size:0.82rem;font-weight:700;color:#fff;margin-bottom:4px;font-family:'Playfair Display',serif}
+.tour-meta{font-size:0.6rem;color:rgba(255,255,255,0.38);margin-bottom:8px}
+.tour-price{font-size:1rem;font-weight:900;color:var(--bright)}
+.bk-cta{width:230px;display:flex;flex-direction:column;gap:11px;flex-shrink:0}
+.cta-phone{
+  flex:1;background:var(--gold);border-radius:14px;
+  padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.cta-phone-num{font-size:0.96rem;font-weight:800;color:#fff}
+.cta-phone-sub{font-size:0.68rem;color:rgba(255,255,255,0.8);line-height:1.5}
+.cta-zalo{
+  flex:1;background:#0068ff;border-radius:14px;
+  padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.cta-zalo-num{font-size:0.96rem;font-weight:800;color:#fff}
+.cta-zalo-sub{font-size:0.68rem;color:rgba(255,255,255,0.8);line-height:1.5}
+
+/* ══════════════════════════════════════
+   SLIDE 10 — CONTACT
+══════════════════════════════════════ */
+.contact-body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;flex:1;gap:0;
+}
+.s10-logo{height:58px;display:block;margin-bottom:18px}
+.s10-title{font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;color:var(--gold);margin-bottom:8px;font-family:'Playfair Display',serif}
+.s10-sub{font-size:0.8rem;color:rgba(0,0,0,0.4);margin-bottom:16px}
+.s10-line{width:180px;height:1px;background:rgba(201,133,58,0.32);margin:0 auto 20px}
+.contact-cards{display:flex;gap:12px;justify-content:center;margin-bottom:20px}
+.cc{
+  background:rgba(201,133,58,0.06);border:1.5px solid rgba(201,133,58,0.26);
+  border-radius:14px;padding:18px 22px;min-width:152px;
+}
+.cc-lbl{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;font-weight:700}
+.cc-val{font-size:0.8rem;font-weight:600;color:var(--brown)}
+.s10-line2{width:180px;height:1px;background:rgba(201,133,58,0.15);margin:0 auto 12px}
+.s10-tagline{font-size:0.76rem;font-style:italic;color:var(--gold);margin-bottom:6px}
+.s10-copy{font-size:0.62rem;color:rgba(0,0,0,0.26);letter-spacing:0.04em}
+</style>
+</head>
+<body>
+
+<div class="slider">
+<div class="track" id="track">
+
+<!-- ══ SLIDE 1 — HERO ══ -->
+<div class="slide slide-hero">
+  <div class="top-bar"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+      <p class="hero-label">Hành trình:</p>
+      <h1>
+        <span class="hero-sub">Trải nghiệm</span>
+        <span class="hero-main">Vùng Đất Tâm Linh</span>
+      </h1>
+      <p class="hero-tagline">Đi để trải nghiệm — Đến để cảm hóa tâm hồn!</p>
+      <ul class="hero-places">
+        <li>Núi Bà Đen</li>
+        <li>Tòa Thánh Tây Ninh</li>
+        <li>Chùa Gò Kén</li>
+      </ul>
+      <p class="hero-hotline">Hotline + Zalo: (+84) 0886 131 139</p>
+      <button class="hero-btn">Đặt Tour Ngay →</button>
+    </div>
+    <div class="hero-right">
+      <img src="./nbd-1.webp" alt="Núi Bà Đen — Tây Ninh" loading="eager"/>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 — VÌ SAO CHỌN ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">2 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Tổng Quan</span>
+    <h2 class="s-title">Vì sao chọn V Holiday Tour?</h2>
+    <p class="s-sub">15 năm đồng hành cùng hàng chục nghìn lữ khách trên khắp Việt Nam</p>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">4.8 ★</div>
+        <div class="stat-lbl">Đánh Giá Trung Bình</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">50K+</div>
+        <div class="stat-lbl">Lữ Khách Hài Lòng</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">15 Năm</div>
+        <div class="stat-lbl">Kinh Nghiệm</div>
+      </div>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="ti-icon">✔</span> Xác nhận trong 2 giờ</div>
+      <div class="trust-item"><span class="ti-icon">↺</span> Hủy miễn phí 48h</div>
+      <div class="trust-item"><span class="ti-icon">◉</span> Bảo hiểm chuyến đi</div>
+      <div class="trust-item"><span class="ti-icon">📞</span> Hỗ trợ 24/7</div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 3 — ĐIỂM ĐẾN ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">3 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Khám Phá Tây Ninh</span>
+    <h2 class="s-title">Những điểm đến không thể bỏ qua</h2>
+    <div class="dest-grid">
+      <div class="dc">
+        <img src="./hero-bg.webp" alt="Núi Bà Đen" style="object-position:right center"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-region">Tây Ninh · Điểm Chính</span>
+          <div class="dc-name">Núi Bà Đen</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="./nbd-1.webp" alt="Tòa Thánh" style="object-position:center 30%"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-region">Di Sản Tâm Linh</span>
+          <div class="dc-name">Tòa Thánh Tây Ninh</div>
+        </div>
+      </div>
+      <div class="dc">
+        <div class="dc-ov" style="background:rgba(20,10,2,0.55)"></div>
+        <div class="dc-info">
+          <span class="dc-region">Không gian tâm linh</span>
+          <div class="dc-name">Chùa Gò Kén</div>
+        </div>
+      </div>
+      <div class="dc">
+        <div class="dc-ov" style="background:rgba(20,10,2,0.55)"></div>
+        <div class="dc-info">
+          <span class="dc-region">Không gian tâm linh</span>
+          <div class="dc-name">Vườn Ưu Đàm</div>
+        </div>
+      </div>
+      <div class="dc">
+        <div class="dc-ov" style="background:rgba(20,10,2,0.55)"></div>
+        <div class="dc-info">
+          <span class="dc-region">Đặc Sản Tây Ninh</span>
+          <div class="dc-name">Ẩm Thực</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 4 — LỊCH TRÌNH ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">4 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Hành Trình Gợi Ý</span>
+    <h2 class="s-title">Một ngày trọn vẹn tại Tây Ninh</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-dot">🌄</div>
+        <div class="tl-time">05:30–07:00</div>
+        <div class="tl-desc">Đón du khách tại điểm hẹn, di chuyển đến Tây Ninh trong buổi sáng sớm bình yên — Điểm Check-in đang Hot nhất miền Nam lúc này.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">🍜</div>
+        <div class="tl-time">07:00–08:30</div>
+        <div class="tl-desc">Thưởng thức đặc sản Tây Ninh: Bánh canh Trảng Bàng nổi tiếng.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">⛰️</div>
+        <div class="tl-time">08:30–12:00</div>
+        <div class="tl-desc">Từ nhà ga Cáp treo lên đỉnh Vân Sơn — Phật Bà Tây Phổ Đà Sơn, tượng Phật Di Lặc, Nhạc nước, Vườn Ưu Đàm, Vườn hoa và Check-in tọa độ 986m.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">🍽️</div>
+        <div class="tl-time">12:00–13:30</div>
+        <div class="tl-desc">Tiệc Buffet trưa ở độ cao 986m giữa biển mây bồng bềnh... Thưởng thức tinh hoa ẩm thực trên 80 món đủ làm siêu lòng các tín đồ.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">🏛️</div>
+        <div class="tl-time">14:00–15:00</div>
+        <div class="tl-desc">Màu sắc rực rỡ, hoa văn tinh xảo, kiến trúc độc đáo có 1-0-2 — linh hồn của vùng đất tâm linh Tây Ninh.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">🕌</div>
+        <div class="tl-time">15:15–16:30</div>
+        <div class="tl-desc">Bản thiết kế từ Châu Âu giữa lòng Tây Ninh — Công trình kiến trúc tuyệt đẹp hơn 120 năm tuổi. Nơi bạn hòa mình nơi đất Phật.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">🌅</div>
+        <div class="tl-time">17:00–20:00</div>
+        <div class="tl-desc">Một hành trình trải nghiệm đáng nhớ... và giờ là lúc trở về ngôi nhà thân yêu của bạn!</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 5 — DỊCH VỤ ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">5 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Dịch Vụ</span>
+    <h2 class="s-title">Trải nghiệm khác biệt</h2>
+    <div class="svc-row">
+      <div class="svc-card">
+        <span class="svc-num">01</span>
+        <div class="svc-title">Trải Nghiệm Độc Quyền</div>
+        <div class="svc-desc">Thiết kế hành trình dành riêng cho gia đình, mang tính riêng tư, thoải mái!</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">02</span>
+        <div class="svc-title">Food & Culture</div>
+        <div class="svc-desc">Bánh canh Trảng Bàng, muối ớt Tây Ninh — Hành trình ẩm thực khám phá vùng đất này.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">03</span>
+        <div class="svc-title">Trekking</div>
+        <div class="svc-desc">Chinh phục Núi Bà Đen qua đường rừng nguyên sinh — Thiết kế dành riêng cho nhóm của bạn!</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 6 — THƯ VIỆN ẢNH ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">6 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Thư Viện Ảnh</span>
+    <h2 class="s-title">Nhìn từ góc nhìn khác</h2>
+    <div class="gallery-grid">
+      <div class="gi">
+        <img src="./hero-bg.webp" alt="Phật Bà" style="object-position:right center"/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Núi Bà Đen</span><strong>Tượng Phật Bà Tây Bổ Đà Sơn</strong></div>
+      </div>
+      <div class="gi">
+        <img src="./nbd-1.webp" alt="Di Lặc" style="object-position:center 30%"/>
+        <div class="gi-ov"></div>
+        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Tượng Di Lặc Bồ Tát</strong></div>
+      </div>
+      <div class="gi">
+        <div class="gi-ov" style="background:rgba(18,8,2,0.5)"></div>
+        <div class="gi-lbl"><span>Tòa Thánh</span><strong>Tòa Thánh Cao Đài</strong></div>
+      </div>
+      <div class="gi">
+        <div class="gi-ov" style="background:rgba(18,8,2,0.5)"></div>
+        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Vườn Ưu Đàm</strong></div>
+      </div>
+      <div class="gi">
+        <div class="gi-ov" style="background:rgba(18,8,2,0.5)"></div>
+        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Vườn hoa</strong></div>
+      </div>
+      <div class="gi">
+        <div class="gi-ov" style="background:rgba(18,8,2,0.5)"></div>
+        <div class="gi-lbl"><span>Chùa</span><strong>Chùa Gò Kén</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 7 — TRIẾT LÝ ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">7 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Triết Lý</span>
+    <div class="manifesto">
+      <div class="mf-title">Chúng tôi tin vào sức mạnh của sự tĩnh lặng</div>
+      <div class="mf-line"></div>
+      <p class="mf-quote">
+        "Không phải nơi nào cũng có thể chữa lành ! Nhưng đến Tây Ninh là có thật !<br>
+        Giữa không gian tâm linh hiện hữu: Vườn Ưu Đàm - Phật bà Tây Phổ Đà Sơn - Di Lặc...<br>
+        và giữa làn khói, tiếng chuông ngân, bạn sẽ tìm lại chính mình !"
+      </p>
+      <div class="mf-author">- V Holiday Tour -</div>
+      <div class="mf-cards">
+        <div class="mf-card"><div class="mf-icon">🌿</div>Tôn trọng không gian thiêng liêng và văn hóa địa phương</div>
+        <div class="mf-card"><div class="mf-icon">🤝</div>Kết nối với cộng đồng — Một không gian tâm linh hiện hữu.</div>
+        <div class="mf-card"><div class="mf-icon">💡</div>Hướng dẫn viên nhiệt tình, am hiểu lịch sử và tâm linh Tây Ninh</div>
+        <div class="mf-card"><div class="mf-icon">🛡️</div>Hỗ trợ du khách 24/7 — An toàn là ưu tiên hàng đầu</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 8 — CẢM NHẬN ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">8 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag">Cảm Nhận</span>
+    <h2 class="s-title">Du khách nói gì</h2>
+    <div class="test-cols">
+      <div class="test-col">
+        <div class="tc">
+          <div class="tc-stars">★★★★★</div>
+          <div class="tc-quote">"Bình minh trên đỉnh núi, tiếng chuông chùa vang vọng — tôi chưa bao giờ cảm thấy bình yên đến vậy."</div>
+          <div class="tc-hr"></div>
+          <div class="tc-name">Nguyễn Thị Lan Anh</div>
+          <div class="tc-loc">TP. Hồ Chí Minh</div>
+        </div>
+        <div class="tc">
+          <div class="tc-stars">★★★★★</div>
+          <div class="tc-quote">"Ẩm thực Tây Ninh rất ngon: Bánh canh Trảng Bàng, Bánh tráng phơi sương ngon nhất từng ăn! Lịch trình Tour rất hợp lý, không vội vàng."</div>
+          <div class="tc-hr"></div>
+          <div class="tc-name">Lê Thị Hương Giang</div>
+          <div class="tc-loc">Đà Nẵng</div>
+        </div>
+      </div>
+      <div class="test-col mid">
+        <div class="tc">
+          <div class="tc-stars">★★★★★</div>
+          <div class="tc-quote">"Lịch trình phù hợp, điểm đến thu hút. Hướng dẫn viên rất am hiểu về lịch sử, kinh nghiệm và nhiệt tình chu đáo. Đây là điểm cộng của V Holiday Tour"</div>
+          <div class="tc-hr"></div>
+          <div class="tc-name">Trần Văn Minh</div>
+          <div class="tc-loc">Hà Nội</div>
+        </div>
+        <div class="tc">
+          <div class="tc-stars">★★★★★</div>
+          <div class="tc-quote">"Tôi đã tham gia Tour Trekking Núi Bà Đen của V Holiday Tour. Một hành trình trải nghiệm hấp dẫn! Nhất định tôi sẽ quay lại."</div>
+          <div class="tc-hr"></div>
+          <div class="tc-name">Võ Thị Thanh Mai</div>
+          <div class="tc-loc">Cần Thơ</div>
+        </div>
+      </div>
+      <div class="test-col">
+        <div class="tc">
+          <div class="tc-stars">★★★★★</div>
+          <div class="tc-quote">"Đã đi Tây Ninh nhiều lần nhưng đây là lần đầu tiên tôi thực sự hiểu về vùng đất này. Cảm ơn đội ngũ đã mang lại trải nghiệm sâu sắc đến vậy."</div>
+          <div class="tc-hr"></div>
+          <div class="tc-name">Phạm Quốc Huy</div>
+          <div class="tc-loc">Bình Dương</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 9 — ĐẶT TOUR ══ -->
+<div class="slide slide-booking">
+  <div class="bk-bg"><img src="./nbd-1.webp" alt=""/></div>
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">9 / 10</span>
+  </div>
+  <div class="sb">
+    <span class="s-tag" style="color:var(--bright)">Đặt Tour</span>
+    <h2 class="s-title" style="color:#fff">Chọn hành trình của bạn</h2>
+    <div class="bk-inner">
+      <div class="bk-tours">
+        <div class="tour-card">
+          <span class="tour-badge">Bán Chạy</span>
+          <div class="tour-name">Núi Bà Đen 1 Ngày</div>
+          <div class="tour-meta">1 ngày · Từ 4 người</div>
+          <div class="tour-price">790.000đ</div>
+        </div>
+        <div class="tour-card">
+          <span class="tour-badge">Tour 2 ngày</span>
+          <div class="tour-name">Tây Ninh 2N1Đ</div>
+          <div class="tour-meta">2 ngày 1 đêm · Từ 4 người</div>
+          <div class="tour-price">2.190.000đ</div>
+        </div>
+        <div class="tour-card">
+          <span class="tour-badge">Trekking</span>
+          <div class="tour-name">Núi Bà Đen</div>
+          <div class="tour-meta">1 ngày · Từ 4 người</div>
+          <div class="tour-price">990.000đ</div>
+        </div>
+        <div class="tour-card">
+          <span class="tour-badge">Không gian mua sắm</span>
+          <div class="tour-name">Đặc sản Tây Ninh</div>
+          <div class="tour-meta">Điểm mua đặc sản</div>
+          <div class="tour-price">45.000đ</div>
+        </div>
+        <div class="tour-card">
+          <span class="tour-badge">Ẩm Thực</span>
+          <div class="tour-name">Food & Culture</div>
+          <div class="tour-meta">Bánh canh + Bánh Tráng</div>
+          <div class="tour-price">219.000đ</div>
+        </div>
+        <div class="tour-card">
+          <span class="tour-badge">Photo Tour + Núi Bà Đen</span>
+          <div class="tour-name">Săn Bình Minh</div>
+          <div class="tour-meta">1 ngày · Từ 4 người</div>
+          <div class="tour-price">890.000đ</div>
+        </div>
+      </div>
+      <div class="bk-cta">
+        <div class="cta-phone">
+          <div style="font-size:1.3rem">📞</div>
+          <div class="cta-phone-num">Gọi: (+84) 0886 131 139</div>
+          <div class="cta-phone-sub">✓ Tư vấn miễn phí<br>— Xác nhận trong 2 giờ</div>
+        </div>
+        <div class="cta-zalo">
+          <div style="font-size:1.3rem">💬</div>
+          <div class="cta-zalo-num">Zalo: 0886 131 139</div>
+          <div class="cta-zalo-sub">✓ Phản hồi ngay qua chat Zalo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
+</div>
+
+<!-- ══ SLIDE 10 — LIÊN HỆ ══ -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="sh">
+    <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
+    <span class="sh-count">10 / 10</span>
+  </div>
+  <div class="sb">
+    <div class="contact-body">
+      <img src="./Logo-PNG.png" class="s10-logo" alt="V Holiday Tour"/>
+      <div class="s10-title">Sẵn sàng đồng hành cùng bạn</div>
+      <div class="s10-sub">Liên hệ ngay hôm nay — tư vấn miễn phí, xác nhận trong 2 giờ làm việc.</div>
+      <div class="s10-line"></div>
+      <div class="contact-cards">
+        <div class="cc">
+          <span class="cc-lbl">Hotline</span>
+          <div class="cc-val">(+84) 0886 131 139</div>
+        </div>
+        <div class="cc">
+          <span class="cc-lbl">Zalo</span>
+          <div class="cc-val">0886 131 139</div>
+        </div>
+        <div class="cc">
+          <span class="cc-lbl">Email</span>
+          <div class="cc-val">info@vholidaytour.com</div>
+        </div>
+        <div class="cc">
+          <span class="cc-lbl">Giờ Làm Việc</span>
+          <div class="cc-val">7:00 – 21:00 hàng ngày</div>
+        </div>
+      </div>
+      <div class="s10-line2"></div>
+      <div class="s10-tagline">Nâng tầm giá trị cuộc sống qua từng hành trình</div>
+      <div class="s10-copy">©2025 Bản quyền thuộc về V Holiday Tour | www.vholidaytour.com</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end track -->
+</div><!-- end slider -->
+
+<!-- NAV ARROWS -->
+<button class="nav-btn hidden" id="prevBtn" onclick="go(-1)">‹</button>
+<button class="nav-btn" id="nextBtn" onclick="go(1)">›</button>
+
+<!-- DOTS -->
+<div class="dots" id="dotsEl"></div>
+
+<script>
+const track = document.getElementById('track');
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const dotsEl = document.getElementById('dotsEl');
+let cur = 0;
+
+// Build dots
+slides.forEach((_,i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i===0?' active':'');
+  d.setAttribute('aria-label','Slide '+(i+1));
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(idx) {
+  idx = Math.max(0, Math.min(total-1, idx));
+  cur = idx;
+  track.style.transform = `translateX(-${cur * 100}vw)`;
+  dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  prevBtn.classList.toggle('hidden', cur===0);
+  nextBtn.classList.toggle('hidden', cur===total-1);
+}
+function go(dir){ goTo(cur+dir); }
+
+// Keyboard
+window.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown') go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp') go(-1);
+});
+
+// Touch swipe
+let tx = 0;
+document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; },{passive:true});
+document.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].clientX - tx;
+  if(Math.abs(dx) > 50) go(dx<0?1:-1);
+},{passive:true});
+</script>
+</body>
+</html>
