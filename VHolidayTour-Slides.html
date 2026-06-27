@@ -426,25 +426,41 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 }
 
 /* ══════════════════════════════════════
-   SLIDE 8 — TESTIMONIALS
+   SLIDE 8 — TESTIMONIALS (vertical glow)
 ══════════════════════════════════════ */
-.test-cols{display:flex;gap:10px;flex:1;align-items:flex-start;overflow:hidden}
-.test-col{display:flex;flex-direction:column;gap:10px;flex:1}
-.test-col.mid{padding-top:20px}
-.tc{background:var(--card);border-radius:14px;padding:16px}
-.tc-stars{color:var(--bright);font-size:0.85rem;margin-bottom:7px}
-.tc-quote{font-size:0.7rem;color:rgba(255,255,255,0.52);line-height:1.68;margin-bottom:12px;font-style:italic}
-.tc-hr{height:1px;background:rgba(255,255,255,0.08);margin-bottom:10px}
-.tc-name{font-size:0.74rem;font-weight:700;color:#fff;margin-bottom:2px}
-.tc-loc{font-size:0.62rem;color:rgba(255,255,255,0.3);letter-spacing:0.06em}
+.tc-list{
+  display:flex;flex-direction:column;gap:11px;
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  max-width:540px;width:100%;margin:0 auto;padding:2px 2px 8px;
+}
+.tc{
+  background:var(--card);border-radius:16px;padding:16px 22px;
+  text-align:center;
+  border:1.5px solid rgba(201,133,58,0.22);
+  transition:border-color 0.45s ease,box-shadow 0.45s ease;
+}
+.tc.is-lit{
+  border-color:var(--bright);
+  box-shadow:0 0 22px rgba(232,168,64,0.2),inset 0 0 10px rgba(232,168,64,0.04);
+}
+.tc:nth-child(2){transition-delay:110ms}
+.tc:nth-child(3){transition-delay:220ms}
+.tc:nth-child(4){transition-delay:330ms}
+.tc:nth-child(5){transition-delay:440ms}
+.tc-stars{color:var(--bright);font-size:0.88rem;margin-bottom:8px}
+.tc-quote{font-size:0.72rem;color:rgba(255,255,255,0.52);line-height:1.7;margin-bottom:10px;font-style:italic}
+.tc-hr{height:1px;background:rgba(255,255,255,0.1);margin-bottom:8px}
+.tc-name{font-size:0.76rem;font-weight:700;color:#fff;margin-bottom:3px}
+.tc-loc{font-size:0.62rem;color:rgba(255,255,255,0.32);letter-spacing:0.06em}
 
 @media(max-width:767px){
-  .sb-test{overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .test-cols{flex-direction:column;overflow:visible;gap:8px}
-  .test-col.mid{padding-top:0}
-  .tc{padding:13px}
-  .tc-quote{font-size:0.68rem;margin-bottom:10px}
-  .tc-name{font-size:0.72rem}
+  .tc-list{max-width:100%;padding:2px 0 8px}
+  .tc{padding:14px 18px}
+  .tc:nth-child(2){transition-delay:0ms}
+  .tc:nth-child(3){transition-delay:0ms}
+  .tc:nth-child(4){transition-delay:0ms}
+  .tc:nth-child(5){transition-delay:0ms}
+  .tc-quote{font-size:0.7rem}
 }
 
 /* ══════════════════════════════════════
@@ -846,51 +862,51 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
     <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
     <span class="sh-count">8 / 10</span>
   </div>
-  <div class="sb sb-test">
+  <div class="sb">
     <span class="s-tag">Cảm Nhận</span>
     <h2 class="s-title">Du khách nói gì</h2>
-    <div class="test-cols">
-      <div class="test-col">
-        <div class="tc">
-          <div class="tc-stars">★★★★★</div>
-          <div class="tc-quote">"Bình minh trên đỉnh núi, tiếng chuông chùa vang vọng — tôi chưa bao giờ cảm thấy bình yên đến vậy."</div>
-          <div class="tc-hr"></div>
-          <div class="tc-name">Nguyễn Thị Lan Anh</div>
-          <div class="tc-loc">TP. Hồ Chí Minh</div>
-        </div>
-        <div class="tc">
-          <div class="tc-stars">★★★★★</div>
-          <div class="tc-quote">"Ẩm thực Tây Ninh rất ngon: Bánh canh Trảng Bàng, Bánh tráng phơi sương ngon nhất từng ăn! Lịch trình Tour rất hợp lý, không vội vàng."</div>
-          <div class="tc-hr"></div>
-          <div class="tc-name">Lê Thị Hương Giang</div>
-          <div class="tc-loc">Đà Nẵng</div>
-        </div>
+    <div class="tc-list" id="tcList">
+
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Bình minh trên đỉnh núi, tiếng chuông chùa vang vọng — tôi chưa bao giờ cảm thấy bình yên đến vậy."</div>
+        <div class="tc-hr"></div>
+        <div class="tc-name">Nguyễn Thị Lan Anh</div>
+        <div class="tc-loc">TP. Hồ Chí Minh</div>
       </div>
-      <div class="test-col mid">
-        <div class="tc">
-          <div class="tc-stars">★★★★★</div>
-          <div class="tc-quote">"Lịch trình phù hợp, điểm đến thu hút. Hướng dẫn viên rất am hiểu về lịch sử, kinh nghiệm và nhiệt tình chu đáo. Đây là điểm cộng của V Holiday Tour"</div>
-          <div class="tc-hr"></div>
-          <div class="tc-name">Trần Văn Minh</div>
-          <div class="tc-loc">Hà Nội</div>
-        </div>
-        <div class="tc">
-          <div class="tc-stars">★★★★★</div>
-          <div class="tc-quote">"Tôi đã tham gia Tour Trekking Núi Bà Đen của V Holiday Tour. Một hành trình trải nghiệm hấp dẫn! Nhất định tôi sẽ quay lại."</div>
-          <div class="tc-hr"></div>
-          <div class="tc-name">Võ Thị Thanh Mai</div>
-          <div class="tc-loc">Cần Thơ</div>
-        </div>
+
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Lịch trình phù hợp, điểm đến thu hút. Hướng dẫn viên rất am hiểu về lịch sử, kinh nghiệm và nhiệt tình chu đáo. Đây là điểm cộng của V Holiday Tour"</div>
+        <div class="tc-hr"></div>
+        <div class="tc-name">Trần Văn Minh</div>
+        <div class="tc-loc">Hà Nội</div>
       </div>
-      <div class="test-col">
-        <div class="tc">
-          <div class="tc-stars">★★★★★</div>
-          <div class="tc-quote">"Đã đi Tây Ninh nhiều lần nhưng đây là lần đầu tiên tôi thực sự hiểu về vùng đất này. Cảm ơn đội ngũ đã mang lại trải nghiệm sâu sắc đến vậy."</div>
-          <div class="tc-hr"></div>
-          <div class="tc-name">Phạm Quốc Huy</div>
-          <div class="tc-loc">Bình Dương</div>
-        </div>
+
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Ẩm thực Tây Ninh rất ngon: Bánh canh Trảng Bàng, Bánh tráng phơi sương ngon nhất từng ăn! Lịch trình Tour rất hợp lý, không vội vàng."</div>
+        <div class="tc-hr"></div>
+        <div class="tc-name">Lê Thị Hương Giang</div>
+        <div class="tc-loc">Đà Nẵng</div>
       </div>
+
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Đã đi Tây Ninh nhiều lần nhưng đây là lần đầu tôi thực sự hiểu về vùng đất này."</div>
+        <div class="tc-hr"></div>
+        <div class="tc-name">Phạm Quốc Huy</div>
+        <div class="tc-loc">Bình Dương</div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Tôi đã tham gia Tour Trekking Núi Bà Đen của V Holiday Tour. Một hành trình trải nghiệm hấp dẫn! Nhất định tôi sẽ quay lại."</div>
+        <div class="tc-hr"></div>
+        <div class="tc-name">Võ Thị Thanh Mai</div>
+        <div class="tc-loc">Cần Thơ</div>
+      </div>
+
     </div>
   </div>
   <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
@@ -1065,6 +1081,24 @@ function litMfCards(on) {
   });
 }
 
+// Slide 8 testimonial card glow
+const tcCards = document.querySelectorAll('.tc');
+const tcList  = document.getElementById('tcList');
+
+if(tcList && tcCards.length) {
+  const tcObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('is-lit', e.isIntersecting));
+  }, { root: tcList, threshold: 0.55 });
+  tcCards.forEach(c => tcObs.observe(c));
+}
+
+function litTcCards(on) {
+  tcCards.forEach((c,i) => {
+    c.classList.remove('is-lit');
+    if(on) setTimeout(() => c.classList.add('is-lit'), i * 110);
+  });
+}
+
 function goTo(idx) {
   if(isAnimating) return;
   idx = Math.max(0, Math.min(total-1, idx));
@@ -1082,6 +1116,9 @@ function goTo(idx) {
   // Slide 7 (index 6) manifesto card glow
   if(cur === 6) litMfCards(true);
   else if(leaving === 6) litMfCards(false);
+  // Slide 8 (index 7) testimonial card glow
+  if(cur === 7) litTcCards(true);
+  else if(leaving === 7) litTcCards(false);
   setTimeout(() => { isAnimating = false; }, 650);
 }
 function go(dir){ goTo(cur+dir); }
