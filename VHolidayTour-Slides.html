@@ -377,26 +377,53 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 }
 
 /* ══════════════════════════════════════
-   SLIDE 7 — MANIFESTO
+   SLIDE 7 — MANIFESTO (vertical cards)
 ══════════════════════════════════════ */
 .manifesto{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;gap:0}
 .mf-title{
-  font-size:clamp(1.1rem,2.2vw,1.75rem);font-weight:700;
-  color:var(--brown);max-width:660px;margin-bottom:12px;line-height:1.3;
+  font-size:clamp(1.05rem,2.1vw,1.65rem);font-weight:700;
+  color:var(--brown);max-width:660px;margin-bottom:10px;line-height:1.3;
 }
-.mf-line{width:56px;height:2px;background:var(--gold);border-radius:1px;margin:0 auto 16px}
+.mf-line{width:52px;height:2px;background:var(--gold);border-radius:1px;margin:0 auto 14px}
 .mf-quote{
-  font-size:clamp(0.78rem,1.3vw,0.95rem);font-style:italic;
-  color:rgba(0,0,0,0.48);max-width:680px;line-height:1.9;margin-bottom:6px;
+  font-size:clamp(0.76rem,1.2vw,0.9rem);font-style:italic;
+  color:rgba(0,0,0,0.48);max-width:660px;line-height:1.85;margin-bottom:5px;
 }
-.mf-author{font-size:0.66rem;letter-spacing:0.16em;color:var(--gold);margin-bottom:24px}
-.mf-cards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mf-author{font-size:0.64rem;letter-spacing:0.16em;color:var(--gold);margin-bottom:16px}
+.mf-cards{
+  display:flex;flex-direction:column;align-items:center;
+  gap:10px;width:100%;max-width:480px;margin:0 auto;
+}
 .mf-card{
-  background:rgba(201,133,58,0.07);border:1.5px solid rgba(201,133,58,0.2);
-  border-radius:12px;padding:14px 16px;font-size:0.7rem;
-  color:rgba(0,0,0,0.48);text-align:center;max-width:190px;line-height:1.6;
+  background:rgba(201,133,58,0.06);
+  border:1.5px solid rgba(201,133,58,0.22);
+  border-radius:14px;padding:13px 24px;
+  font-size:0.76rem;color:rgba(0,0,0,0.5);
+  text-align:center;width:100%;line-height:1.68;
+  transition:border-color 0.45s ease,box-shadow 0.45s ease;
 }
-.mf-icon{font-size:1.1rem;margin-bottom:6px}
+.mf-card.is-lit{
+  border-color:var(--bright);
+  box-shadow:0 0 22px rgba(232,168,64,0.2),inset 0 0 12px rgba(232,168,64,0.04);
+}
+.mf-card:nth-child(2){transition-delay:120ms}
+.mf-card:nth-child(3){transition-delay:240ms}
+.mf-card:nth-child(4){transition-delay:360ms}
+.mf-icon{font-size:1.15rem;margin-bottom:6px;display:block}
+
+@media(max-width:767px){
+  .sb-manifesto{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .manifesto{justify-content:flex-start;gap:0}
+  .mf-title{font-size:1.05rem;margin-bottom:8px}
+  .mf-line{margin-bottom:10px}
+  .mf-quote{font-size:0.73rem;line-height:1.75;margin-bottom:4px}
+  .mf-author{margin-bottom:12px}
+  .mf-cards{max-width:100%;gap:8px}
+  .mf-card:nth-child(2){transition-delay:0ms}
+  .mf-card:nth-child(3){transition-delay:0ms}
+  .mf-card:nth-child(4){transition-delay:0ms}
+  .mf-card{padding:11px 18px;font-size:0.73rem}
+}
 
 /* ══════════════════════════════════════
    SLIDE 8 — TESTIMONIALS
@@ -755,22 +782,22 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
     <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
     <span class="sh-count">7 / 10</span>
   </div>
-  <div class="sb">
+  <div class="sb sb-manifesto">
     <span class="s-tag">Triết Lý</span>
     <div class="manifesto">
       <div class="mf-title">Chúng tôi tin vào sức mạnh của sự tĩnh lặng</div>
       <div class="mf-line"></div>
       <p class="mf-quote">
-        "Không phải nơi nào cũng có thể chữa lành ! Nhưng đến Tây Ninh là có thật !<br>
+        " Không phải nơi nào cũng có thể chữa lành ! Nhưng đến Tây Ninh là có thật !<br>
         Giữa không gian tâm linh hiện hữu: Vườn Ưu Đàm - Phật bà Tây Phổ Đà Sơn - Di Lặc...<br>
-        và giữa làn khói, tiếng chuông ngân, bạn sẽ tìm lại chính mình !"
+        và giữa làn khói, tiếng chuông ngân, bạn sẽ tìm lại chính mình ! "
       </p>
       <div class="mf-author">- V Holiday Tour -</div>
-      <div class="mf-cards">
+      <div class="mf-cards" id="mfCardsList">
         <div class="mf-card"><div class="mf-icon">🌿</div>Tôn trọng không gian thiêng liêng và văn hóa địa phương</div>
-        <div class="mf-card"><div class="mf-icon">🤝</div>Kết nối với cộng đồng — Một không gian tâm linh hiện hữu.</div>
+        <div class="mf-card"><div class="mf-icon">🤝</div>Kết nối với cộng đồng - Một không gian tâm linh hiện hữu.</div>
         <div class="mf-card"><div class="mf-icon">💡</div>Hướng dẫn viên nhiệt tình, am hiểu lịch sử và tâm linh Tây Ninh</div>
-        <div class="mf-card"><div class="mf-icon">🛡️</div>Hỗ trợ du khách 24/7 — An toàn là ưu tiên hàng đầu</div>
+        <div class="mf-card"><div class="mf-icon">🛡️</div>Hỗ trợ du khách 24/7 - An toàn là ưu tiên hàng đầu</div>
       </div>
     </div>
   </div>
@@ -971,7 +998,6 @@ slides.forEach((_,i) => {
 const svcCards = document.querySelectorAll('.svc-card');
 const svcList  = document.getElementById('svcList');
 
-// IntersectionObserver for mobile scroll-reveal
 if(svcList && svcCards.length) {
   const mobObs = new IntersectionObserver(entries => {
     entries.forEach(e => e.target.classList.toggle('is-lit', e.isIntersecting));
@@ -983,6 +1009,24 @@ function litSvcCards(on) {
   svcCards.forEach((c,i) => {
     c.classList.remove('is-lit');
     if(on) setTimeout(() => c.classList.add('is-lit'), i * 140);
+  });
+}
+
+// Slide 7 manifesto card glow
+const mfCards    = document.querySelectorAll('.mf-card');
+const mfCardsList = document.getElementById('mfCardsList');
+
+if(mfCardsList && mfCards.length) {
+  const mfObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('is-lit', e.isIntersecting));
+  }, { root: mfCardsList, threshold: 0.55 });
+  mfCards.forEach(c => mfObs.observe(c));
+}
+
+function litMfCards(on) {
+  mfCards.forEach((c,i) => {
+    c.classList.remove('is-lit');
+    if(on) setTimeout(() => c.classList.add('is-lit'), i * 130);
   });
 }
 
@@ -1000,6 +1044,9 @@ function goTo(idx) {
   // Slide 5 (index 4) card glow
   if(cur === 4) litSvcCards(true);
   else if(leaving === 4) litSvcCards(false);
+  // Slide 7 (index 6) manifesto card glow
+  if(cur === 6) litMfCards(true);
+  else if(leaving === 6) litMfCards(false);
   setTimeout(() => { isAnimating = false; }, 650);
 }
 function go(dir){ goTo(cur+dir); }
