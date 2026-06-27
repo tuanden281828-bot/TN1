@@ -12,7 +12,7 @@
 <meta property="og:type" content="website"/>
 <meta name="robots" content="index, follow"/>
 <link rel="icon" href="./Logo-PNG.png"/>
-<link rel="preload" href="./hero-bg.webp" as="image"/>
+<link rel="preload" href="./nbd-1.webp" as="image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="preconnect" href="https://picsum.photos"/>
@@ -59,9 +59,11 @@ nav.scrolled{
   padding:14px 48px;
   border-bottom:1px solid rgba(201,133,58,0.2);
 }
-.nav-logo{display:inline-flex;align-items:center}
+.nav-logo{display:inline-flex;align-items:center;transition:opacity 0.4s}
 .nav-logo-img{height:44px;width:auto;background:#fff;border-radius:8px;padding:4px 10px;display:block;transition:opacity 0.3s}
 .nav-logo:hover .nav-logo-img{opacity:0.88}
+/* hide nav logo over hero so hero-left logo shows cleanly */
+#navbar:not(.scrolled) .nav-logo{opacity:0;pointer-events:none}
 .footer-brand .nav-logo-img{height:52px;padding:6px 12px;border-radius:10px}
 .footer-logo-wrap .nav-logo-img{height:36px}
 .nav-links{display:flex;gap:28px;align-items:center;list-style:none}
@@ -77,42 +79,50 @@ nav.scrolled{
 .page.active{display:block}
 
 /* ══ HERO ══ */
-.hero{
-  position:relative;height:100vh;min-height:600px;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
+.hero{height:100vh;min-height:580px;display:flex;overflow:hidden}
+.hero-left{
+  width:44%;background:var(--deep);flex-shrink:0;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 52px 60px;position:relative;
 }
-.hero-bg{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(10,6,2,0.08) 0%,rgba(10,6,2,0.22) 40%,rgba(10,6,2,0.7) 72%,rgba(10,6,2,0.97) 100%),
-    url('./hero-bg.webp') center 15%/cover no-repeat;
-  transform:scale(1.06);
-  transition:transform 9s ease-out;
-}
-.hero-bg.loaded{transform:scale(1)}
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:920px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid rgba(201,133,58,0.45);color:var(--bright);
-  font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;
-  padding:8px 20px;border-radius:100px;margin-bottom:28px;
-  backdrop-filter:blur(6px);
-}
-.hero-title{
+.hero-logo-wrap{position:absolute;top:28px;left:40px}
+.hero-logo-wrap img{height:50px;background:#fff;border-radius:8px;padding:4px 10px;display:block}
+.hero-label{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.hero-title-sub{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.8rem,9vw,7.5rem);
-  font-weight:300;line-height:1.05;letter-spacing:-0.01em;margin-bottom:10px;
+  font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:300;
+  color:var(--white);line-height:1.1;margin-bottom:6px;display:block;
 }
-.hero-title em{font-style:italic;color:var(--bright);display:block}
-.hero-subtitle{font-size:clamp(0.95rem,1.8vw,1.15rem);font-weight:300;color:rgba(255,255,255,0.68);letter-spacing:0.04em;margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:var(--white);padding:15px 38px;border-radius:100px;font-size:0.88rem;font-weight:600;letter-spacing:0.04em;border:none;transition:var(--T);cursor:pointer}
+.hero-title-main{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(2rem,3.8vw,3.6rem);font-weight:900;
+  color:var(--bright);line-height:1.05;display:block;
+  text-transform:uppercase;letter-spacing:0.02em;margin-bottom:18px;
+}
+.hero-tagline{
+  font-size:0.9rem;font-style:italic;
+  color:rgba(255,255,255,0.58);margin-bottom:30px;line-height:1.6;
+}
+.hero-places{list-style:none;margin-bottom:26px}
+.hero-places li{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.hero-places li:first-child{
+  color:var(--white);font-size:0.8rem;
+  border-bottom:1px solid rgba(201,133,58,0.25);padding-bottom:9px;margin-bottom:2px;
+}
+.hero-places li:not(:first-child)::before{content:'— ';color:var(--gold)}
+.hero-hotline{
+  font-size:0.75rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:30px;
+}
+.hero-right{flex:1;overflow:hidden;position:relative}
+.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+.btn-primary{background:var(--gold);color:var(--white);padding:14px 36px;border-radius:100px;font-size:0.88rem;font-weight:600;letter-spacing:0.04em;border:none;transition:var(--T);cursor:pointer}
 .btn-primary:hover{background:var(--bright);transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,133,58,0.35)}
-.btn-ghost{background:transparent;color:var(--white);padding:15px 38px;border-radius:100px;font-size:0.88rem;font-weight:500;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.28);transition:var(--T);cursor:pointer;display:flex;align-items:center;gap:8px}
+.btn-ghost{background:transparent;color:var(--white);padding:14px 36px;border-radius:100px;font-size:0.88rem;font-weight:500;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.28);transition:var(--T);cursor:pointer;display:flex;align-items:center;gap:8px}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.06)}
-.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,0.38);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;animation:bounce 2.2s infinite}
-.hero-scroll::after{content:'';width:1px;height:36px;background:linear-gradient(to bottom,rgba(255,255,255,0.28),transparent)}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
 /* ══ STATS ══ */
 .stats{background:var(--warm);padding:36px 48px;display:flex;justify-content:center;border-top:1px solid rgba(201,133,58,0.15);border-bottom:1px solid rgba(201,133,58,0.15)}
@@ -370,6 +380,7 @@ footer{background:var(--dark);border-top:1px solid rgba(201,133,58,0.12);padding
 @media(max-width:1024px){
   section{padding:72px 32px}
   nav,nav.scrolled{padding:18px 32px}
+  .hero-left{width:48%;padding:90px 40px 50px}
   .dest-card:nth-child(1){grid-column:span 12}
   .dest-card:nth-child(2){grid-column:span 12}
   .dest-card:nth-child(3),.dest-card:nth-child(4),.dest-card:nth-child(5){grid-column:span 4}
@@ -384,6 +395,9 @@ footer{background:var(--dark);border-top:1px solid rgba(201,133,58,0.12);padding
   nav,.nav.scrolled{padding:14px 20px}
   .nav-links,.nav-cta{display:none}
   .nav-menu{display:flex}
+  .hero{flex-direction:column;height:auto;min-height:100vh}
+  .hero-left{width:100%;padding:80px 24px 40px;flex:none}
+  .hero-right{height:52vw;min-height:280px;flex:none}
   section{padding:60px 20px}
   .stats{flex-wrap:wrap;padding:0}
   .stat{flex:0 0 50%;border-right:none;border-bottom:1px solid rgba(201,133,58,0.15);padding:20px}
@@ -409,7 +423,8 @@ footer{background:var(--dark);border-top:1px solid rgba(201,133,58,0.12);padding
   .booking-hero{padding:130px 20px 60px}
 }
 @media(max-width:480px){
-  .hero-title{font-size:2.6rem}
+  .hero-title-main{font-size:1.8rem}
+  .hero-left{padding:72px 18px 36px}
 }
 
 /* ══ PRELOADER ══ */
@@ -522,22 +537,31 @@ footer{background:var(--dark);border-top:1px solid rgba(201,133,58,0.12);padding
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-content">
-    <div class="hero-badge fade-up">✦ Vùng đất thiêng liêng miền Nam</div>
-    <h1 class="hero-title serif fade-up fade-up-delay-1">
-      Trải nghiệm
-      <em>Vùng Đất Tâm Linh</em>
+  <!-- LEFT PANEL -->
+  <div class="hero-left">
+    <div class="hero-logo-wrap">
+      <img src="./Logo-PNG.png" alt="V Holiday Tour"/>
+    </div>
+    <p class="hero-label fade-up">Hành trình:</p>
+    <h1 class="fade-up fade-up-delay-1">
+      <span class="hero-title-sub">Trải nghiệm</span>
+      <span class="hero-title-main">Vùng Đất Tâm Linh</span>
     </h1>
-    <p class="hero-subtitle fade-up fade-up-delay-2">Núi Bà Đen huyền bí, Tòa Thánh Cao Đài linh thiêng — hành trình chạm đến những điều thiêng liêng ngay tại Tây Ninh.</p>
-    <div class="hero-actions fade-up fade-up-delay-3">
-      <button class="btn-primary" onclick="showPage('booking')">Đặt Tour Ngay</button>
-      <button class="btn-ghost" onclick="document.getElementById('destinations').scrollIntoView({behavior:'smooth'})">
-        <span>↓</span> Khám Phá
-      </button>
+    <p class="hero-tagline fade-up fade-up-delay-2">Đi để trải nghiệm — Đến để cảm hóa tâm hồn!</p>
+    <ul class="hero-places fade-up fade-up-delay-2">
+      <li>Núi Bà Đen</li>
+      <li>Tòa Thánh Tây Ninh</li>
+      <li>Chùa Gò Kén</li>
+    </ul>
+    <p class="hero-hotline fade-up fade-up-delay-3">Hotline + Zalo: (+84) 0886 131 139</p>
+    <div class="fade-up fade-up-delay-3">
+      <button class="btn-primary" onclick="showPage('booking')">Đặt Tour Ngay →</button>
     </div>
   </div>
-  <div class="hero-scroll">Cuộn xuống</div>
+  <!-- RIGHT PANEL: Núi Bà Đen image -->
+  <div class="hero-right">
+    <img src="./nbd-1.webp" alt="Núi Bà Đen — Tây Ninh" loading="eager"/>
+  </div>
 </section>
 
 <!-- STATS -->
@@ -1164,12 +1188,6 @@ window.addEventListener('scroll', () => {
     });
   }
 }, {passive: true});
-
-// ── HERO BG ZOOM ──
-setTimeout(() => {
-  const hb = document.getElementById('heroBg');
-  if (hb) hb.classList.add('loaded');
-}, 120);
 
 // ── FADE-UP OBSERVER ──
 function observeFadeUps() {
