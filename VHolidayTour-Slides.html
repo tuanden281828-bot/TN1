@@ -238,23 +238,47 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 }
 
 /* ══════════════════════════════════════
-   SLIDE 4 — TIMELINE
+   SLIDE 4 — TIMELINE (vertical)
 ══════════════════════════════════════ */
-.timeline{display:flex;position:relative;flex:1;align-items:flex-start;padding-top:12px;gap:0}
-.timeline::before{
-  content:'';position:absolute;top:38px;left:0;right:0;height:2px;
-  background:linear-gradient(to right,var(--gold),var(--bright),var(--gold));
-  opacity:0.32;
+.timeline{
+  display:flex;flex-direction:column;
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  position:relative;padding:6px 8px 8px 52px;gap:0;
 }
-.tl-step{flex:1;padding:0 7px;text-align:center;position:relative}
+.timeline::before{
+  content:'';position:absolute;
+  left:19px;top:24px;bottom:24px;width:2px;
+  background:linear-gradient(to bottom,var(--gold),var(--bright),var(--gold));
+  opacity:0.35;
+}
+.tl-step{
+  display:flex;align-items:flex-start;
+  padding-bottom:16px;position:relative;gap:0;
+}
+.tl-step:last-child{padding-bottom:0}
 .tl-dot{
-  width:40px;height:40px;border-radius:50%;
+  width:38px;height:38px;border-radius:50%;
   background:var(--card);border:2px solid var(--gold);
   display:flex;align-items:center;justify-content:center;
-  font-size:0.9rem;margin:0 auto 9px;position:relative;z-index:1;
+  font-size:0.88rem;position:absolute;left:-52px;top:0;z-index:2;
+  flex-shrink:0;
 }
-.tl-time{font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:600}
-.tl-desc{font-size:0.58rem;color:rgba(0,0,0,0.45);line-height:1.55}
+.tl-body{flex:1}
+.tl-time{
+  font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:5px;font-weight:700;
+}
+.tl-desc{font-size:0.74rem;color:rgba(0,0,0,0.52);line-height:1.68}
+
+/* Mobile refinements */
+@media(max-width:767px){
+  .timeline{padding:4px 6px 8px 44px}
+  .timeline::before{left:15px}
+  .tl-dot{width:32px;height:32px;font-size:0.78rem;left:-44px}
+  .tl-time{font-size:0.58rem}
+  .tl-desc{font-size:0.72rem}
+  .tl-step{padding-bottom:14px}
+}
 
 /* ══════════════════════════════════════
    SLIDE 5 — SERVICES
@@ -541,41 +565,63 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
     <span class="s-tag">Hành Trình Gợi Ý</span>
     <h2 class="s-title">Một ngày trọn vẹn tại Tây Ninh</h2>
     <div class="timeline">
+
       <div class="tl-step">
         <div class="tl-dot">🌄</div>
-        <div class="tl-time">05:30–07:00</div>
-        <div class="tl-desc">Đón du khách tại điểm hẹn, di chuyển đến Tây Ninh trong buổi sáng sớm bình yên — Điểm Check-in đang Hot nhất miền Nam lúc này.</div>
+        <div class="tl-body">
+          <div class="tl-time">05:30 – 07:00</div>
+          <div class="tl-desc">Đón Du khách tại điểm hẹn, di chuyển đến Tây Ninh trong buổi sáng sớm bình yên – Điểm Check-in đang Hot nhất miền Nam lúc này.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">🍜</div>
-        <div class="tl-time">07:00–08:30</div>
-        <div class="tl-desc">Thưởng thức đặc sản Tây Ninh: Bánh canh Trảng Bàng nổi tiếng.</div>
+        <div class="tl-body">
+          <div class="tl-time">07:00 – 08:30</div>
+          <div class="tl-desc">Thưởng thức đặc sản Tây Ninh: Bánh canh Tràng Bàng nổi tiếng.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">⛰️</div>
-        <div class="tl-time">08:30–12:00</div>
-        <div class="tl-desc">Từ nhà ga Cáp treo lên đỉnh Vân Sơn — Phật Bà Tây Phổ Đà Sơn, tượng Phật Di Lặc, Nhạc nước, Vườn Ưu Đàm, Vườn hoa và Check-in tọa độ 986m.</div>
+        <div class="tl-body">
+          <div class="tl-time">08:30 – 12:00</div>
+          <div class="tl-desc">Từ nhà ga Cáp treo lớn nhất thế giới lên đỉnh Vân Sơn tham quan: Phật Bà Tây Phổ Đà Sơn, tượng Phật Di Lặc, Nhạc nước, Vườn Ưu Đàm, Vườn hoa và Check-in tọa độ 986m.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">🍽️</div>
-        <div class="tl-time">12:00–13:30</div>
-        <div class="tl-desc">Tiệc Buffet trưa ở độ cao 986m giữa biển mây bồng bềnh... Thưởng thức tinh hoa ẩm thực trên 80 món đủ làm siêu lòng các tín đồ.</div>
+        <div class="tl-body">
+          <div class="tl-time">12:00 – 13:30</div>
+          <div class="tl-desc">Tiệc Buffet trưa ở độ cao 986m giữa biển mây bồng bềnh... Thưởng thức tinh hoa ẩm thực trên 80 món đủ làm siêu lòng các tín đồ.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">🏛️</div>
-        <div class="tl-time">14:00–15:00</div>
-        <div class="tl-desc">Màu sắc rực rỡ, hoa văn tinh xảo, kiến trúc độc đáo có 1-0-2 — linh hồn của vùng đất tâm linh Tây Ninh.</div>
+        <div class="tl-body">
+          <div class="tl-time">14:00 – 15:00</div>
+          <div class="tl-desc">Màu sắc rực rỡ, hoa văn tinh xảo, kiến trúc độc đáo có 1-0-2 … như chạm vào linh hồn của vùng đất thánh tâm linh.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">🕌</div>
-        <div class="tl-time">15:15–16:30</div>
-        <div class="tl-desc">Bản thiết kế từ Châu Âu giữa lòng Tây Ninh — Công trình kiến trúc tuyệt đẹp hơn 120 năm tuổi. Nơi bạn hòa mình nơi đất Phật.</div>
+        <div class="tl-body">
+          <div class="tl-time">15:15 – 16:30</div>
+          <div class="tl-desc">Bản thiết kế từ Châu Âu giữa lòng Tây Ninh – Công trình kiến trúc tuyệt đẹp hơn 120 năm tuổi. Nơi bạn được xoa dịu tâm hồn và hòa mình nơi đất Phật.</div>
+        </div>
       </div>
+
       <div class="tl-step">
         <div class="tl-dot">🌅</div>
-        <div class="tl-time">17:00–20:00</div>
-        <div class="tl-desc">Một hành trình trải nghiệm đáng nhớ... và giờ là lúc trở về ngôi nhà thân yêu của bạn!</div>
+        <div class="tl-body">
+          <div class="tl-time">17:00 – 20:00</div>
+          <div class="tl-desc">Một hành trình trải nghiệm đáng nhớ mang theo nhiều kỷ niệm đẹp của vùng đất Tây Ninh... và giờ là lúc trở về ngôi nhà thân yêu của bạn!</div>
+        </div>
       </div>
+
     </div>
   </div>
   <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
