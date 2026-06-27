@@ -321,30 +321,60 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 }
 
 /* ══════════════════════════════════════
-   SLIDE 6 — GALLERY
+   SLIDE 6 — PHOTO CAROUSEL
 ══════════════════════════════════════ */
-.gallery-grid{
-  display:grid;
-  grid-template-columns:1.6fr 1.2fr 1fr 1fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:7px;flex:1;overflow:hidden;
+.caro-wrap{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+.caro-stage{
+  flex:1;position:relative;overflow:hidden;border-radius:12px;
+  background:#0d0706;min-height:0;
 }
-.gi{position:relative;overflow:hidden;border-radius:9px;background:var(--card)}
-.gi.ph-a{background:linear-gradient(135deg,#1a0e06,#3d2410)}
-.gi.ph-b{background:linear-gradient(135deg,#0e1218,#243040)}
-.gi.ph-c{background:linear-gradient(135deg,#0e1a0e,#243824)}
-.gi:nth-child(1){grid-row:1/3;grid-column:1}
-.gi:nth-child(2){grid-row:1/3;grid-column:2}
-.gi:nth-child(3){grid-row:1;grid-column:3}
-.gi:nth-child(4){grid-row:1;grid-column:4}
-.gi:nth-child(5){grid-row:1;grid-column:5}
-.gi:nth-child(6){grid-row:2;grid-column:3/6}
-.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
-.gi:hover img{transform:scale(1.06)}
-.gi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,8,2,0.85) 0%,rgba(18,8,2,0.1) 55%)}
-.gi-lbl{position:absolute;bottom:10px;left:12px;right:12px}
-.gi-lbl span{font-size:0.54rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:2px}
-.gi-lbl strong{font-size:0.78rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
+.caro-track{
+  display:flex;height:100%;
+  transition:transform 0.48s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.caro-item{
+  min-width:100%;height:100%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:#0d0706;overflow:hidden;
+}
+.caro-item img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;display:block;
+}
+.caro-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,0.48);border:1.5px solid rgba(201,133,58,0.42);
+  color:var(--bright);border-radius:50%;
+  width:38px;height:38px;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:10;transition:background 0.2s;
+  line-height:1;padding:0;
+}
+.caro-arr:hover{background:rgba(0,0,0,0.75)}
+.caro-prev{left:10px}.caro-next{right:10px}
+.caro-badge{
+  position:absolute;bottom:10px;right:12px;
+  font-size:0.58rem;color:rgba(255,255,255,0.6);
+  background:rgba(0,0,0,0.5);padding:3px 9px;border-radius:10px;pointer-events:none;
+}
+.caro-dots{
+  display:flex;justify-content:center;align-items:center;
+  gap:6px;flex-shrink:0;padding:2px 4px;flex-wrap:wrap;
+}
+.cdot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(201,133,58,0.28);border:none;cursor:pointer;padding:0;
+  transition:all 0.3s;flex-shrink:0;
+}
+.cdot.active{background:var(--bright);transform:scale(1.35)}
+
+@media(max-width:767px){
+  .caro-stage{flex:none;aspect-ratio:4/3;width:100%}
+  .caro-wrap{overflow-y:auto}
+  .caro-arr{width:32px;height:32px;font-size:0.88rem}
+  .cdot{width:6px;height:6px}
+}
 
 /* ══════════════════════════════════════
    SLIDE 7 — MANIFESTO
@@ -677,7 +707,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
   <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
 </div>
 
-<!-- ══ SLIDE 6 — THƯ VIỆN ẢNH ══ -->
+<!-- ══ SLIDE 6 — THƯ VIỆN ẢNH (CAROUSEL) ══ -->
 <div class="slide">
   <div class="top-bar"></div>
   <div class="sh">
@@ -686,38 +716,33 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
   </div>
   <div class="sb">
     <span class="s-tag">Thư Viện Ảnh</span>
-    <h2 class="s-title">Nhìn từ góc nhìn khác</h2>
-    <div class="gallery-grid">
-      <div class="gi">
-        <img src="./hero-bg.webp" alt="Phật Bà" style="object-position:right center"/>
-        <div class="gi-ov"></div>
-        <div class="gi-lbl"><span>Núi Bà Đen</span><strong>Tượng Phật Bà Tây Bổ Đà Sơn</strong></div>
+    <h2 class="s-title">Khoảnh khắc đáng nhớ</h2>
+    <div class="caro-wrap">
+      <div class="caro-stage" id="caroStage">
+        <button class="caro-arr caro-prev" id="caroPrevBtn">&#8592;</button>
+        <button class="caro-arr caro-next" id="caroNextBtn">&#8594;</button>
+        <div class="caro-track" id="caroTrack">
+          <div class="caro-item"><img src="./at/1.jpg"  alt="Tour Tây Ninh" loading="eager"/></div>
+          <div class="caro-item"><img src="./at/2.jpg"  alt="Núi Bà Đen Tây Ninh" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/3.jpg"  alt="Baden Station" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/4.jpg"  alt="Nhà ga cáp treo" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/5.jpg"  alt="Cáp treo Núi Bà Đen" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/6.jpg"  alt="Phật Bà Tây Bổ Đà Sơn" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/7.jpg"  alt="Tượng Di Lặc & nhạc nước" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/8.png"  alt="Nội thất chùa" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/9.jpg"  alt="Vườn vầng trăng" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/10.jpg" alt="Sân thượng đỉnh núi" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/11.jpg" alt="Tầng mây đỉnh Vân Sơn" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/12.jpg" alt="Hồ sen vô cực" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/13.jpg" alt="Tòa Thánh Tây Ninh" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/14.jpg" alt="Tòa Thánh Cao Đài" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/15.jpg" alt="Tượng vàng đêm" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/16.jpg" alt="Chuông kinh luân" loading="lazy"/></div>
+          <div class="caro-item"><img src="./at/17.jpg" alt="Phật Bà sương khói" loading="lazy"/></div>
+        </div>
+        <div class="caro-badge" id="caroBadge">1 / 17</div>
       </div>
-      <div class="gi">
-        <img src="./nbd-1.webp" alt="Di Lặc" style="object-position:center 30%"/>
-        <div class="gi-ov"></div>
-        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Tượng Di Lặc Bồ Tát</strong></div>
-      </div>
-      <div class="gi ph-a">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem;opacity:0.12">🏛️</div>
-        <div class="gi-ov" style="background:linear-gradient(to top,rgba(18,6,2,0.9) 0%,rgba(18,6,2,0.1) 55%)"></div>
-        <div class="gi-lbl"><span>Tòa Thánh</span><strong>Tòa Thánh Cao Đài</strong></div>
-      </div>
-      <div class="gi ph-c">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem;opacity:0.12">🌸</div>
-        <div class="gi-ov" style="background:linear-gradient(to top,rgba(6,18,6,0.9) 0%,rgba(6,18,6,0.1) 55%)"></div>
-        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Vườn Ưu Đàm</strong></div>
-      </div>
-      <div class="gi ph-b">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem;opacity:0.12">🌺</div>
-        <div class="gi-ov" style="background:linear-gradient(to top,rgba(6,8,18,0.9) 0%,rgba(6,8,18,0.1) 55%)"></div>
-        <div class="gi-lbl"><span>Đỉnh Vân Sơn</span><strong>Vườn hoa</strong></div>
-      </div>
-      <div class="gi ph-a" style="background:linear-gradient(135deg,#12100a,#2a2010)">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem;opacity:0.12">🏯</div>
-        <div class="gi-ov" style="background:linear-gradient(to top,rgba(18,14,4,0.9) 0%,rgba(18,14,4,0.1) 55%)"></div>
-        <div class="gi-lbl"><span>Chùa Tây Ninh</span><strong>Chùa Gò Kén</strong></div>
-      </div>
+      <div class="caro-dots" id="caroDots"></div>
     </div>
   </div>
   <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
@@ -993,6 +1018,11 @@ document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; ty=e.touch
 document.addEventListener('touchend', e=>{
   const dx = e.changedTouches[0].clientX - tx;
   const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) < 40) return;
+  if(cur === 5 && window._caroNext){ // Slide 6: swipe controls carousel
+    dx < 0 ? window._caroNext() : window._caroPrev();
+    return;
+  }
   if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) go(dx<0?1:-1);
 },{passive:true});
 
@@ -1005,6 +1035,55 @@ window.addEventListener('wheel', e => {
   if(e.deltaY > 30) go(1);
   else if(e.deltaY < -30) go(-1);
 }, {passive:true});
+
+// ══════════════════════════════════════
+//  SLIDE 6 — PHOTO CAROUSEL
+// ══════════════════════════════════════
+(function(){
+  const stage  = document.getElementById('caroStage');
+  const track  = document.getElementById('caroTrack');
+  const dotsEl = document.getElementById('caroDots');
+  const badge  = document.getElementById('caroBadge');
+  const btnP   = document.getElementById('caroPrevBtn');
+  const btnN   = document.getElementById('caroNextBtn');
+  if(!track) return;
+
+  const items = track.querySelectorAll('.caro-item');
+  const n = items.length;
+  let ci = 0, ctimer = null;
+
+  // Build dots
+  for(let i = 0; i < n; i++){
+    const d = document.createElement('button');
+    d.className = 'cdot' + (i===0?' active':'');
+    d.setAttribute('aria-label','Ảnh '+(i+1));
+    d.onclick = () => { caroGo(i); resetCTimer(); };
+    dotsEl.appendChild(d);
+  }
+
+  function caroGo(i){
+    ci = ((i % n) + n) % n;
+    track.style.transform = `translateX(-${ci*100}%)`;
+    badge.textContent = `${ci+1} / ${n}`;
+    dotsEl.querySelectorAll('.cdot').forEach((d,j) => d.classList.toggle('active', j===ci));
+  }
+
+  window._caroNext = function(){ caroGo(ci+1); resetCTimer(); };
+  window._caroPrev = function(){ caroGo(ci-1); resetCTimer(); };
+
+  btnP.onclick = window._caroPrev;
+  btnN.onclick = window._caroNext;
+
+  function resetCTimer(){
+    clearInterval(ctimer);
+    ctimer = setInterval(() => caroGo(ci+1), 2000);
+  }
+
+  stage.addEventListener('mouseenter', () => clearInterval(ctimer));
+  stage.addEventListener('mouseleave', resetCTimer);
+
+  resetCTimer();
+})();
 </script>
 </body>
 </html>
