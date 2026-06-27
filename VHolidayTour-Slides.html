@@ -211,21 +211,31 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 ══════════════════════════════════════ */
 .dest-grid{
   display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:9px;flex:1;overflow:hidden;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:8px;flex:1;overflow:hidden;
 }
 .dc{position:relative;overflow:hidden;border-radius:10px;background:var(--card)}
-.dc.ph1{background:linear-gradient(135deg,#1a0e06 0%,#2e1a09 40%,#3d2410 100%)}
-.dc.ph2{background:linear-gradient(135deg,#0e1a10 0%,#1a2e1a 40%,#243d28 100%)}
-.dc.ph3{background:linear-gradient(135deg,#0e1218 0%,#1a2030 40%,#242840 100%)}
-.dc:first-child{grid-row:span 2}
 .dc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
 .dc:hover img{transform:scale(1.05)}
-.dc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,8,2,0.9) 0%,rgba(18,8,2,0.1) 55%)}
-.dc-info{position:absolute;bottom:0;left:0;right:0;padding:13px 15px}
-.dc-region{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:3px}
-.dc-name{font-size:1rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif;line-height:1.2}
+.dc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,5,1,0.88) 0%,rgba(12,5,1,0.05) 55%)}
+.dc-info{position:absolute;bottom:0;left:0;right:0;padding:11px 13px}
+.dc-region{font-size:0.54rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:3px}
+.dc-name{font-size:0.9rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif;line-height:1.2}
+
+/* Mobile — 1 column vertical, 1:1 ratio, scrollable */
+@media(max-width:767px){
+  .sb-gallery{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:16px}
+  .dest-grid{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+    flex:none;overflow:visible;gap:10px;
+  }
+  .dc{aspect-ratio:1/1}
+  .dc-name{font-size:1rem}
+  .dc-region{font-size:0.6rem}
+  .dc-info{padding:14px 16px}
+}
 
 /* ══════════════════════════════════════
    SLIDE 4 — TIMELINE
@@ -463,48 +473,56 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
     <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
     <span class="sh-count">3 / 10</span>
   </div>
-  <div class="sb">
+  <div class="sb sb-gallery">
     <span class="s-tag">Khám Phá Tây Ninh</span>
     <h2 class="s-title">Những điểm đến không thể bỏ qua</h2>
     <div class="dest-grid">
       <div class="dc">
-        <img src="./hero-bg.webp" alt="Núi Bà Đen" style="object-position:right center"/>
+        <img src="./s3-1.png" alt="Núi Bà Đen"/>
         <div class="dc-ov"></div>
         <div class="dc-info">
-          <span class="dc-region">Tây Ninh · Điểm Chính</span>
+          <span class="dc-region">Tây Ninh · Cao 986m</span>
           <div class="dc-name">Núi Bà Đen</div>
         </div>
       </div>
       <div class="dc">
-        <img src="./nbd-1.webp" alt="Tòa Thánh" style="object-position:center 30%"/>
+        <img src="./s3-2.png" alt="Đỉnh Vân Sơn"/>
         <div class="dc-ov"></div>
         <div class="dc-info">
-          <span class="dc-region">Di Sản Tâm Linh</span>
-          <div class="dc-name">Tòa Thánh Tây Ninh</div>
+          <span class="dc-region">Biển Mây Bồng Bềnh</span>
+          <div class="dc-name">Đỉnh Vân Sơn</div>
         </div>
       </div>
-      <div class="dc ph1">
-        <div class="dc-ov" style="background:linear-gradient(to top,rgba(18,8,2,0.92) 0%,rgba(18,8,2,0.2) 60%)"></div>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);font-size:2rem;opacity:0.18">🏯</div>
+      <div class="dc">
+        <img src="./s3-3.png" alt="Phật Bà Tây Bổ Đà Sơn"/>
+        <div class="dc-ov"></div>
         <div class="dc-info">
-          <span class="dc-region">Không gian tâm linh</span>
+          <span class="dc-region">Tâm Linh · Tây Bổ Đà</span>
+          <div class="dc-name">Phật Bà Tây Bổ Đà Sơn</div>
+        </div>
+      </div>
+      <div class="dc">
+        <img src="./s3-4.png" alt="Chùa Gò Kén"/>
+        <div class="dc-ov"></div>
+        <div class="dc-info">
+          <span class="dc-region">Không Gian Tâm Linh</span>
           <div class="dc-name">Chùa Gò Kén</div>
         </div>
       </div>
-      <div class="dc ph2">
-        <div class="dc-ov" style="background:linear-gradient(to top,rgba(6,18,8,0.92) 0%,rgba(6,18,8,0.2) 60%)"></div>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);font-size:2rem;opacity:0.18">🌸</div>
+      <div class="dc">
+        <img src="./s3-5.png" alt="Tòa Thánh Tây Ninh"/>
+        <div class="dc-ov"></div>
         <div class="dc-info">
-          <span class="dc-region">Không gian tâm linh</span>
-          <div class="dc-name">Vườn Ưu Đàm</div>
+          <span class="dc-region">Di Sản Kiến Trúc</span>
+          <div class="dc-name">Tòa Thánh Tây Ninh</div>
         </div>
       </div>
-      <div class="dc ph3">
-        <div class="dc-ov" style="background:linear-gradient(to top,rgba(8,10,18,0.92) 0%,rgba(8,10,18,0.2) 60%)"></div>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);font-size:2rem;opacity:0.18">🍜</div>
+      <div class="dc">
+        <img src="./s3-6.png" alt="Vườn Ưu Đàm"/>
+        <div class="dc-ov"></div>
         <div class="dc-info">
-          <span class="dc-region">Đặc Sản Tây Ninh</span>
-          <div class="dc-name">Ẩm Thực</div>
+          <span class="dc-region">Đỉnh Vân Sơn · Tâm Linh</span>
+          <div class="dc-name">Vườn Ưu Đàm</div>
         </div>
       </div>
     </div>
