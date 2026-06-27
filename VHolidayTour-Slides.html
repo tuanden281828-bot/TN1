@@ -281,27 +281,43 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 }
 
 /* ══════════════════════════════════════
-   SLIDE 5 — SERVICES
+   SLIDE 5 — SERVICES (vertical, glow)
 ══════════════════════════════════════ */
-.svc-row{display:flex;gap:14px;flex:1}
+.svc-list{
+  display:flex;flex-direction:column;gap:13px;
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  max-width:520px;width:100%;margin:0 auto;
+  padding:2px 2px 8px;
+}
 .svc-card{
-  flex:1;background:var(--card);border-radius:16px;
-  border:1.5px solid rgba(201,133,58,0.3);
-  padding:28px 22px;position:relative;overflow:hidden;
+  background:var(--card);border-radius:16px;
+  border:1.5px solid rgba(201,133,58,0.25);
+  padding:20px 28px 22px;position:relative;
+  text-align:center;
+  transition:border-color 0.5s ease,box-shadow 0.5s ease;
 }
+.svc-card.is-lit{
+  border-color:var(--bright);
+  box-shadow:0 0 26px rgba(232,168,64,0.22),inset 0 0 14px rgba(232,168,64,0.04);
+}
+.svc-card:nth-child(2){transition-delay:130ms}
+.svc-card:nth-child(3){transition-delay:260ms}
 .svc-num{
-  position:absolute;top:14px;right:16px;
-  font-size:2.8rem;font-weight:300;
-  color:rgba(201,133,58,0.09);font-family:'Playfair Display',serif;line-height:1;
+  position:absolute;top:14px;right:18px;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.12em;
+  color:rgba(201,133,58,0.55);
 }
-.svc-icon{font-size:1.6rem;margin-bottom:14px;display:block;line-height:1}
-.svc-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:12px;font-family:'Playfair Display',serif}
-.svc-desc{font-size:0.74rem;color:rgba(255,255,255,0.46);line-height:1.68}
-.svc-tag{
-  display:inline-block;margin-top:14px;
-  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--bright);border:1px solid rgba(232,168,64,0.3);
-  border-radius:20px;padding:4px 12px;
+.svc-icon{font-size:1.75rem;margin-bottom:10px;display:block;line-height:1}
+.svc-title{font-size:1.02rem;font-weight:700;color:#fff;margin-bottom:10px;font-family:'Playfair Display',serif}
+.svc-desc{font-size:0.76rem;color:rgba(255,255,255,0.52);line-height:1.7}
+
+@media(max-width:767px){
+  .svc-list{max-width:100%;padding:2px 0 8px}
+  .svc-card{padding:18px 20px 20px}
+  .svc-title{font-size:0.96rem}
+  .svc-desc{font-size:0.73rem}
+  .svc-card:nth-child(2){transition-delay:0ms}
+  .svc-card:nth-child(3){transition-delay:0ms}
 }
 
 /* ══════════════════════════════════════
@@ -637,27 +653,24 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
   <div class="sb">
     <span class="s-tag">Dịch Vụ</span>
     <h2 class="s-title">Trải nghiệm khác biệt</h2>
-    <div class="svc-row">
+    <div class="svc-list" id="svcList">
       <div class="svc-card">
         <span class="svc-num">01</span>
         <span class="svc-icon">✨</span>
         <div class="svc-title">Trải Nghiệm Độc Quyền</div>
-        <div class="svc-desc">Thiết kế hành trình riêng cho gia đình và nhóm bạn — mang tính riêng tư, thoải mái và trọn vẹn nhất!</div>
-        <span class="svc-tag">Tour Riêng Tư</span>
+        <div class="svc-desc">Thiết kế hành trình dành riêng cho gia đình, mang tính riêng tư, thoải mái !</div>
       </div>
       <div class="svc-card">
         <span class="svc-num">02</span>
         <span class="svc-icon">🍜</span>
-        <div class="svc-title">Food & Culture</div>
-        <div class="svc-desc">Bánh canh Trảng Bàng, muối ớt Tây Ninh, Bánh tráng phơi sương — Hành trình ẩm thực đậm bản sắc vùng đất.</div>
-        <span class="svc-tag">Ẩm Thực & Văn Hóa</span>
+        <div class="svc-title">Food &amp; Culture</div>
+        <div class="svc-desc">Bánh canh Tràng Bàng, muối ớt Tây Ninh — Hành trình ẩm thực.</div>
       </div>
       <div class="svc-card">
         <span class="svc-num">03</span>
         <span class="svc-icon">⛰️</span>
         <div class="svc-title">Trekking</div>
-        <div class="svc-desc">Chinh phục Núi Bà Đen qua đường rừng nguyên sinh — Thiết kế dành riêng cho nhóm yêu thích mạo hiểm.</div>
-        <span class="svc-tag">Khám Phá Thiên Nhiên</span>
+        <div class="svc-desc">Chinh phục Núi Bà Đen qua đường rừng nguyên sinh - Thiết kế dành riêng cho nhóm của bạn !</div>
       </div>
     </div>
   </div>
@@ -929,16 +942,39 @@ slides.forEach((_,i) => {
   dotsEl.appendChild(d);
 });
 
+// Slide 5 service card glow
+const svcCards = document.querySelectorAll('.svc-card');
+const svcList  = document.getElementById('svcList');
+
+// IntersectionObserver for mobile scroll-reveal
+if(svcList && svcCards.length) {
+  const mobObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('is-lit', e.isIntersecting));
+  }, { root: svcList, threshold: 0.55 });
+  svcCards.forEach(c => mobObs.observe(c));
+}
+
+function litSvcCards(on) {
+  svcCards.forEach((c,i) => {
+    c.classList.remove('is-lit');
+    if(on) setTimeout(() => c.classList.add('is-lit'), i * 140);
+  });
+}
+
 function goTo(idx) {
   if(isAnimating) return;
   idx = Math.max(0, Math.min(total-1, idx));
   if(idx === cur) return;
   isAnimating = true;
+  const leaving = cur;
   cur = idx;
   track.style.transform = `translateX(-${cur * 100}vw)`;
   dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
   prevBtn.classList.toggle('hidden', cur===0);
   nextBtn.classList.toggle('hidden', cur===total-1);
+  // Slide 5 (index 4) card glow
+  if(cur === 4) litSvcCards(true);
+  else if(leaving === 4) litSvcCards(false);
   setTimeout(() => { isAnimating = false; }, 650);
 }
 function go(dir){ goTo(cur+dir); }
