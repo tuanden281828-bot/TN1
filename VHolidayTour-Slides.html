@@ -168,25 +168,43 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 /* ══════════════════════════════════════
    SLIDE 2 — STATS
 ══════════════════════════════════════ */
-.stat-row{display:flex;gap:16px;margin-top:4px}
+.stat-row{display:flex;gap:14px;margin-top:4px}
 .stat-box{
   flex:1;background:var(--card);border-radius:16px;
-  padding:28px 20px 24px;text-align:center;
+  padding:24px 16px 20px;text-align:center;
 }
 .stat-num{
-  font-size:clamp(2rem,3.8vw,2.8rem);font-weight:900;
-  color:var(--bright);line-height:1;margin-bottom:12px;
+  font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:900;
+  color:var(--bright);line-height:1;margin-bottom:10px;
   font-family:'Playfair Display',serif;
 }
-.stat-lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.48)}
-.trust-row{display:flex;gap:0;border-top:1px solid rgba(201,133,58,0.14);padding-top:14px;margin-top:auto}
-.trust-item{
-  flex:1;display:flex;align-items:center;gap:8px;
-  font-size:0.7rem;color:rgba(0,0,0,0.42);padding:0 14px;
-  border-right:1px solid rgba(201,133,58,0.12);
+.stat-lbl{font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.48)}
+
+/* Trust row — vertical column, centered */
+.trust-row{
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  border-top:1px solid rgba(201,133,58,0.14);
+  padding-top:16px;margin-top:auto;
 }
-.trust-item:last-child{border-right:none}
-.ti-icon{color:var(--gold);font-size:0.9rem;flex-shrink:0}
+.trust-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:0.72rem;color:rgba(0,0,0,0.5);
+  padding:9px 24px;
+  border:1.5px solid rgba(201,133,58,0.22);border-radius:50px;
+  background:rgba(201,133,58,0.04);
+  min-width:220px;
+}
+.ti-icon{color:var(--gold);font-size:1rem;flex-shrink:0;width:18px;text-align:center}
+
+/* ── Mobile slide 2 ── */
+@media(max-width:767px){
+  .stat-row{gap:8px}
+  .stat-box{padding:14px 10px 12px}
+  .stat-num{font-size:1.5rem;margin-bottom:6px}
+  .stat-lbl{font-size:0.56rem;letter-spacing:0.08em}
+  .trust-row{gap:7px;padding-top:12px}
+  .trust-item{padding:8px 18px;font-size:0.66rem;min-width:180px}
+}
 
 /* ══════════════════════════════════════
    SLIDE 3 — DESTINATIONS
@@ -429,10 +447,10 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
       </div>
     </div>
     <div class="trust-row">
-      <div class="trust-item"><span class="ti-icon">✔</span> Xác nhận trong 2 giờ</div>
-      <div class="trust-item"><span class="ti-icon">↺</span> Hủy miễn phí 48h</div>
-      <div class="trust-item"><span class="ti-icon">◉</span> Bảo hiểm chuyến đi</div>
-      <div class="trust-item"><span class="ti-icon">📞</span> Hỗ trợ 24/7</div>
+      <div class="trust-item"><span class="ti-icon">✔</span>Xác nhận trong 2 giờ</div>
+      <div class="trust-item"><span class="ti-icon">↺</span>Hủy miễn phí 48h</div>
+      <div class="trust-item"><span class="ti-icon">◉</span>Bảo hiểm chuyến đi</div>
+      <div class="trust-item"><span class="ti-icon">📞</span>Hỗ trợ 24/7</div>
     </div>
   </div>
   <div class="sf"><b>V Holiday Tour</b> · vholidaytour.com · (+84) 0886 131 139</div>
