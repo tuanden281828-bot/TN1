@@ -428,7 +428,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 /* ══════════════════════════════════════
    SLIDE 8 — TESTIMONIALS
 ══════════════════════════════════════ */
-.test-cols{display:flex;gap:10px;flex:1;align-items:flex-start}
+.test-cols{display:flex;gap:10px;flex:1;align-items:flex-start;overflow:hidden}
 .test-col{display:flex;flex-direction:column;gap:10px;flex:1}
 .test-col.mid{padding-top:20px}
 .tc{background:var(--card);border-radius:14px;padding:16px}
@@ -437,6 +437,15 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 .tc-hr{height:1px;background:rgba(255,255,255,0.08);margin-bottom:10px}
 .tc-name{font-size:0.74rem;font-weight:700;color:#fff;margin-bottom:2px}
 .tc-loc{font-size:0.62rem;color:rgba(255,255,255,0.3);letter-spacing:0.06em}
+
+@media(max-width:767px){
+  .sb-test{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .test-cols{flex-direction:column;overflow:visible;gap:8px}
+  .test-col.mid{padding-top:0}
+  .tc{padding:13px}
+  .tc-quote{font-size:0.68rem;margin-bottom:10px}
+  .tc-name{font-size:0.72rem}
+}
 
 /* ══════════════════════════════════════
    SLIDE 9 — BOOKING
@@ -474,6 +483,19 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 .cta-zalo-num{font-size:0.96rem;font-weight:800;color:#fff}
 .cta-zalo-sub{font-size:0.68rem;color:rgba(255,255,255,0.8);line-height:1.5}
 
+@media(max-width:767px){
+  .slide-booking .sb{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .bk-inner{flex-direction:column;gap:12px}
+  .bk-tours{grid-template-columns:repeat(2,1fr);gap:8px}
+  .tour-card{padding:11px}
+  .tour-name{font-size:0.78rem}
+  .tour-price{font-size:0.92rem}
+  .bk-cta{width:100%;flex-direction:row;gap:10px}
+  .cta-phone,.cta-zalo{flex:1;padding:14px 10px;gap:4px}
+  .cta-phone-num,.cta-zalo-num{font-size:0.82rem}
+  .cta-phone-sub,.cta-zalo-sub{font-size:0.62rem}
+}
+
 /* ══════════════════════════════════════
    SLIDE 10 — CONTACT
 ══════════════════════════════════════ */
@@ -485,7 +507,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 .s10-title{font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;color:var(--gold);margin-bottom:8px;font-family:'Playfair Display',serif}
 .s10-sub{font-size:0.8rem;color:rgba(0,0,0,0.4);margin-bottom:16px}
 .s10-line{width:180px;height:1px;background:rgba(201,133,58,0.32);margin:0 auto 20px}
-.contact-cards{display:flex;gap:12px;justify-content:center;margin-bottom:20px}
+.contact-cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
 .cc{
   background:rgba(201,133,58,0.06);border:1.5px solid rgba(201,133,58,0.26);
   border-radius:14px;padding:18px 22px;min-width:152px;
@@ -495,6 +517,19 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
 .s10-line2{width:180px;height:1px;background:rgba(201,133,58,0.15);margin:0 auto 12px}
 .s10-tagline{font-size:0.76rem;font-style:italic;color:var(--gold);margin-bottom:6px}
 .s10-copy{font-size:0.62rem;color:rgba(0,0,0,0.26);letter-spacing:0.04em}
+
+@media(max-width:767px){
+  .contact-body{overflow-y:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding-top:4px}
+  .s10-logo{height:42px;margin-bottom:12px}
+  .s10-title{font-size:1.3rem;margin-bottom:6px}
+  .s10-sub{font-size:0.74rem;margin-bottom:12px}
+  .s10-line{margin-bottom:14px}
+  .contact-cards{gap:8px;margin-bottom:14px}
+  .cc{min-width:calc(50% - 4px);flex:1;padding:14px 14px}
+  .cc-val{font-size:0.76rem}
+  .s10-line2{margin-bottom:8px}
+  .s10-tagline{font-size:0.72rem}
+}
 </style>
 </head>
 <body>
@@ -811,7 +846,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
     <div class="sh-logo"><img src="./Logo-PNG.png" alt="V Holiday Tour"/></div>
     <span class="sh-count">8 / 10</span>
   </div>
-  <div class="sb">
+  <div class="sb sb-test">
     <span class="s-tag">Cảm Nhận</span>
     <h2 class="s-title">Du khách nói gì</h2>
     <div class="test-cols">
